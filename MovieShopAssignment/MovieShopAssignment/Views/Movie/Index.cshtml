@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MovieShopAssignment.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            Watch Trailer
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.ImageURL != null)
+{
+    <a href="@item.ImageURL" target="_blank">
+        <img src="@item.ImageURL" width="100" />
+    </a>
+}
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @if (item.TrailerURL != null)
+            {
+                
+                if(!item.TrailerURL.Contains("http://") && !item.TrailerURL.Contains("https://"))
+                {
+                    <iframe width="420" src="http://@item.TrailerURL" frameborder="0"></iframe>
+                    <a href="http://@item.TrailerURL" target="_blank">Video Source</a>
+                }
+                else
+                {
+                    <iframe width="420" src="@item.TrailerURL" frameborder="0"></iframe>
+                    <a href="@item.TrailerURL" target="_blank">Video Source</a>    
+                }
+                
+            }                
+            else
+            {
+                <label>No Trailer</label>
+            }
+        </td>
+        <td>
+            @* Insert Add-To-Cart-Button Here *@
+            @Html.Label("Button to add to cart goes here")
+            @* Insert See-Details-Button Here *@
+            @Html.Label("Button to see details goes here")
+        </td>
+    </tr>
+}
+
+</table>
