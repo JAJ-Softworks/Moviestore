@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MoviesStoreProxy.Model
 {
-    public class Customer
+    public class Customer//Stupid1111
     {
         public int Id { get; set; }
 

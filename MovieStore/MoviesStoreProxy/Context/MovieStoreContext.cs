@@ -11,8 +11,12 @@ namespace MoviesStoreProxy.Context
 
     public class MovieStoreContext : DbContext
     {
-        public MovieStoreContext() : base("MovieStore"){
-          Database.SetInitializer(new MovieDBInitialize());
+        public MovieStoreContext() : base("MovieStore")
+        {
+            Database.SetInitializer(new MovieDBInitialize());
+            Database.SetInitializer(new CustomerDBInitialize());
+            Database.SetInitializer(new GenreDBInitialize());
+            Database.SetInitializer(new OrderDBInitialize());
 
         }
 

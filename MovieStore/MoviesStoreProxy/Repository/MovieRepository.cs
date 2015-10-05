@@ -12,24 +12,27 @@ namespace MoviesStoreProxy.Repository
     {
         public void Add(Movie movie)
         {
-
             using (var ctx = new MovieStoreContext())
             {
-
                 ctx.Movies.Add(movie);
                 ctx.SaveChanges();
             }
         }
 
-        public List<Movie> GetMovies()
+        public List<Movie> ReadAll()
         {
             using (var ctx = new MovieStoreContext())
             {
-
                 return ctx.Movies.ToList();
             }
         }
-
+        //public List<Movie> GetMovies()
+        //{
+        //    using (var ctx = new MovieStoreContext())
+        //    {
+        //        return ctx.Movies.ToList();
+        //    }
+        //}
         public Movie GetMovie(int id)
         {
             using (var ctx = new MovieStoreContext())
@@ -38,8 +41,6 @@ namespace MoviesStoreProxy.Repository
                 return ctx.Movies.Where(x => x.Id == id).FirstOrDefault();
             }
         }
-
-
         public void UpdateMovie(Movie movie)
         {
 

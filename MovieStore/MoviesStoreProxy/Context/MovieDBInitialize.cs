@@ -12,14 +12,16 @@ namespace MoviesStoreProxy.Context
     {
         protected override void Seed(MovieStoreContext context)
         {
+            IList<Movie> movies = new List<Movie>();
 
-            Genre g = (new Genre() { Id =1, Name = "Action" });
-            Genre g1 = (new Genre() { Id = 2, Name = "Drama " });
-            Genre g2 = (new Genre() { Id = 3, Name = "romance " });
+            movies.Add(new Movie() { Title = "Taken 3", Year = 2014, Price = 59.99, ImageUrl = "", TralierUrl = "" });
+            movies.Add(new Movie() { Title = "Taken 3", Year = 2014, Price = 59.99, ImageUrl = "", TralierUrl = "" });
+            movies.Add(new Movie() { Title = "Taken 3", Year = 2014, Price = 56.99, ImageUrl = "", TralierUrl = "" });
+            movies.Add(new Movie() { Title = "Taken 3", Year = 2014, Price = 67.99, ImageUrl = "", TralierUrl = "" });
 
 
-            foreach (Genre std in defaultGenres)
-                context.Genres.Add(std);
+            foreach (Movie m in movies)
+                context.Movies.Add(m);
 
             base.Seed(context);
         }
