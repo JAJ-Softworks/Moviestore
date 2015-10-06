@@ -15,7 +15,6 @@ namespace MovieStore.Controllers
         // GET: Movie
         public ActionResult Index()
         {
-
             List<Genre> genres = facade.GetGenryRepository().ReadAll();
             return View(genres);
         }
@@ -51,6 +50,7 @@ namespace MovieStore.Controllers
         ///HTTPGet Delete only returns a html page with the yes/no button
         public ActionResult Delete(int genreId)
         {
+            Genre g = facade.GetGenryRepository().GetGenre(genreId);
             return View(genreId);
         }
 
@@ -59,6 +59,7 @@ namespace MovieStore.Controllers
         ///HTTPPost DeleteAccepted will be hit if the user presses yes on the delete page above.
         public ActionResult DeleteAccepted(int genreId)
         {
+            facade.GetGenryRepository().DeleteGenre(genreId);
 
             return Redirect("Index");
         }

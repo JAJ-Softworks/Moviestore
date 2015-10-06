@@ -22,11 +22,10 @@ namespace MoviesStoreProxy.Repository
             }
         }
 
-        public List<Customer> GetCustomers()
+        public List<Customer> ReadAll()
         {
             using (var ctx = new MovieStoreContext())
             {
-
                 return ctx.Customers.ToList();
             }
         }

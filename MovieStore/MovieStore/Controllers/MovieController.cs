@@ -24,7 +24,7 @@ namespace MovieStore.Controllers
             {
 
                 var Movie  = new Movie() { Id = 1, Title = "Bog Foot" };
-               Amount = 10;
+               //Amount = 10;
             };
 
             cart.AddOrderLine(new OrderLine());
@@ -32,7 +32,7 @@ namespace MovieStore.Controllers
 
             {
                 var Movie = new Movie() { Id = 2, Title = "Taken 2" };
-                Amount = 12;
+                //Amount = 12;
             };
             Session["ShoppingCart"] = cart;
             List<Movie> movies = facade.GetMovieRepository().ReadAll();
@@ -71,6 +71,7 @@ namespace MovieStore.Controllers
         ///HTTPGet Delete only returns a html page with the yes/no button
         public ActionResult Delete(int movieId)
         {
+            Movie m = facade.GetMovieRepository().GetMovie(movieId);
             return View(movieId);
         }
 
@@ -79,7 +80,8 @@ namespace MovieStore.Controllers
         ///HTTPPost DeleteAccepted will be hit if the user presses yes on the delete page above.
         public ActionResult DeleteAccepted(int movieId)
         {
-            
+            facade.GetMovieRepository().DeleteMovie(movieId);
+
             return Redirect("Index");
         }
     }

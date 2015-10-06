@@ -10,6 +10,7 @@ namespace MoviesStoreProxy.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public virtual List<Movie> movies { get; set;}
 
 
     }
