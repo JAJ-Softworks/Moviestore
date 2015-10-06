@@ -22,7 +22,7 @@ namespace MoviesStoreProxy.Repository
             }
         }
 
-        public List<Genre> GetGenres()
+        public List<Genre> ReadAll()
         {
             using (var ctx = new MovieStoreContext())
             {

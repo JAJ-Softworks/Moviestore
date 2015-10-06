@@ -15,12 +15,10 @@ namespace MoviesStoreProxy.Context
         {
             IList<Genre> genres = new List<Genre>();
 
-            genres.Add(new Genre() { Name = "Action" });
-            genres.Add(new Genre() { Name = "Romance" });
-            genres.Add(new Genre() { Name = "Comadi" });
-            genres.Add(new Genre() { Name = "Action" });
-
-
+            genres.Add(new Genre() {Id = 1, Name = "Action"});
+            genres.Add(new Genre() {Id = 2, Name = "Romance" });
+            genres.Add(new Genre() {Id = 3, Name = "Comedy" });
+           
             foreach (Genre g in genres)
                 context.Genres.Add(g);
 

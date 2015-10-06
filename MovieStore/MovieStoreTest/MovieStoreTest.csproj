@@ -70,7 +70,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="OrderLine.cs" />
     <Compile Include="OrderLineTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

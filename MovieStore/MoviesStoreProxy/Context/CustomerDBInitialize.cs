@@ -15,10 +15,9 @@ namespace MoviesStoreProxy.Context
         {
             IList<Customer> customers = new List<Customer>();
 
-            customers.Add(new Customer() { });
-            customers.Add(new Customer() { });
-            customers.Add(new Customer() { });
-            customers.Add(new Customer() { });
+            customers.Add(new Customer() {FirstName = "Abdirahman", LastName = "Yusuf",Address = " Spangsbjerg Kirkevej 101, 6700 Aarhus", Email = "abdi1500@easv365.dk" });
+            customers.Add(new Customer() { FirstName = "Joakim", LastName = "Christensen", Address = " Spangsbjerg 104, 6700 Esbjerg", Email = "joakim1234@easv365.dk" });
+            customers.Add(new Customer() { FirstName = "Joseif", LastName = "Gharib", Address = " Kirkevej 91, 6700 Esbjerg", Email = "josef452@easv365.dk" });
 
 
             foreach (Customer c in customers)

@@ -11,5 +11,6 @@ namespace MovieStoreTest
     {
         public Movie Movie { get;  set; }
         public int Amount { get; set; }
+        public Order order { get; set; }
     }
 }

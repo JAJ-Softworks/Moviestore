@@ -58,6 +58,7 @@
     <Compile Include="Model\Genre.cs" />
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\Facade.cs" />

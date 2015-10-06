@@ -45,7 +45,7 @@ namespace MoviesStoreProxy.Repository
         {
             Order m = ctx.Orders.Where(x => x.Id == order.Id).First();
             m.customer = order.customer;
-            m.movies = order.movies;
+            m.orderLines = order.orderLines;
             m.date = order.date;
             m.Id = order.Id;
             ctx.SaveChanges();

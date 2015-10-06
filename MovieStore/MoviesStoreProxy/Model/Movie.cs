@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MoviesStoreProxy.Context;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using MovieStoreTest;
 
 namespace MoviesStoreProxy.Model
 {
@@ -24,6 +25,7 @@ namespace MoviesStoreProxy.Model
         public string TralierUrl { get; set; }
         public virtual Genre genre { get; set; }
 
-        
+        public virtual List<OrderLine> orderLines { get; set; }
+
     }
 }

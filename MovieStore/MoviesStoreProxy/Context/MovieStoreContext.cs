@@ -17,8 +17,12 @@ namespace MoviesStoreProxy.Context
             Database.SetInitializer(new CustomerDBInitialize());
             Database.SetInitializer(new GenreDBInitialize());
             Database.SetInitializer(new OrderDBInitialize());
-
         }
+
+        //     protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Movie>().HasMany(x => x.genre).WithMany(y => y.Movies);
+        //}
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Customer> Customers { get; set; }

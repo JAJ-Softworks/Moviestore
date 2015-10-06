@@ -19,8 +19,8 @@ namespace MovieStoreTest
             line.Movie = movie;
             line.Amount = 10;
 
-            Assert.AreEqual(line.Movie, movie, "My movie");
-            Assert.AreEqual(line.Amount, 10, "Amount should");
+            Assert.AreEqual(line.Movie, movie, "My movie ");
+            Assert.AreEqual(line.Amount, 10, "Amount should be 10");
 
     }
  }
