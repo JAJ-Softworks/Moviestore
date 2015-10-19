@@ -17,11 +17,9 @@ namespace MoviesStoreProxy.Context
           
             
             foreach (Genre g in geners)
-               context.Gernes.Add(g);
+               context.Genres.Add(g);
 
             base.Seed(context);
         }
-    }
-}
     }
 }
