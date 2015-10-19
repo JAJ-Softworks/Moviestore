@@ -1,0 +1,59 @@
+﻿@model MovieShopAssignment.Models.ShoppingCart
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Your Shopping Cart</h2>
+@if(Model.OrderLines.FirstOrDefault() != null)
+{
+    <table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Movie")
+        </th>
+        <th>
+            @Html.DisplayName("Price")
+        </th>
+        <th>
+            @Html.DisplayName("Amount")
+        </th>
+        <th>
+            @Html.DisplayName("Total")
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    @foreach (var item in Model.OrderLines)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movie.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movie.Price)
+            </td>
+            <td>
+                @* Check older practice projects for edit methods - except yours didn't work, right? Check online if that is the case *@
+                @* Consider making the entire table a form and using the checkout button to submit the form *@
+                @Html.EditorFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.LabelFor(modelItem => item.Movie.Price * item.Amount);
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "Remove")
+            </td>
+        </tr>
+    }
+</table>    
+}
+else
+{
+    @Html.Label("Your cart is empty, go buy something!")<br />
+}
+@Html.Display("Total:")<br />
+
+@Html.ActionLink("Checkout", "Checkout");
+@Html.ActionLink("Clear Cart", "Clear");
+@Html.ActionLink("Continue Shopping", "Return");

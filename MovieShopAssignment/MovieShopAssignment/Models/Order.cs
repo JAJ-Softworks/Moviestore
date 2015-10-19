@@ -9,7 +9,7 @@ namespace MovieShopAssignment.Models
     {
         public int ID { get; set; }
         public DateTime Date { get; set; }
-        public List<Movie> Movies { get; set; }
+        public List<OrderLine> OrderLines { get; set; }
         public Customer Customer { get; set; }
     }
 }

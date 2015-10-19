@@ -1,23 +1,19 @@
 ﻿@model IEnumerable<MovieShopAssignment.Models.Movie>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movies";
 }
 
-<h2>Index</h2>
+<h2>Movies</h2>
 
 <table class="table">
     <tr>
         <th>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Title) and @Html.DisplayNameFor(model => model.Year)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Genres)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -42,13 +38,18 @@
             
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem => item.Title) (@Html.DisplayFor(modelItem => item.Year))            
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre)
+            @foreach(var genre in item.Genres)
+            {
+                @Html.DisplayFor((text => genre.Name))
+                if(genre != item.Genres.LastOrDefault())
+                {
+                    <label>,</label>
+                }
+            }
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
@@ -59,12 +60,10 @@
                 
                 if(!item.TrailerURL.Contains("http://") && !item.TrailerURL.Contains("https://"))
                 {
-                    <iframe width="420" src="http://@item.TrailerURL" frameborder="0"></iframe>
                     <a href="http://@item.TrailerURL" target="_blank">Video Source</a>
                 }
                 else
                 {
-                    <iframe width="420" src="@item.TrailerURL" frameborder="0"></iframe>
                     <a href="@item.TrailerURL" target="_blank">Video Source</a>    
                 }
                 
@@ -75,7 +74,7 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Add to Cart", "AddToCart")
+            @Html.ActionLink("Add to Cart", "AddToCart", new { movID = item.ID })
         </td>
     </tr>
 }
