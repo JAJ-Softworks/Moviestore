@@ -15,16 +15,15 @@ namespace MoviesStoreProxy.Context
         {
             Database.SetInitializer(new MovieDBInitialize());
             Database.SetInitializer(new CustomerDBInitialize());
-            Database.SetInitializer(new GenreDBInitialize());
             Database.SetInitializer(new OrderDBInitialize());
-           
+            Database.SetInitializer(new GenreDBInitialize());
+
 
         }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Genre> Genres { get; set; }
         public DbSet<Order> Orders { get; set; }
-        
+        public DbSet<Genre> Gernes { get; set; }
 
     }
 }

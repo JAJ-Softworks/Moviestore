@@ -23,15 +23,14 @@ namespace MovieStore.Controllers
             cart.AddOrderLine(new OrderLine());
             {
 
-                var Movie  = new Movie() { Id = 1, Title = "Bog Foot" };
-               //Amount = 10;
+                var Movie  = new Movie() { Id = 1, Title = "Taken 3" };
+                //Amount = 10;
             };
-
-            cart.AddOrderLine(new OrderLine());
-            // orderLines.Add(OrderLine);
+             cart.AddOrderLine(new OrderLine());
+           
 
             {
-                var Movie = new Movie() { Id = 2, Title = "Taken 2" };
+                var Movie = new Movie() { Id = 2, Title = "Terminator 4" };
                 //Amount = 12;
             };
             Session["ShoppingCart"] = cart;

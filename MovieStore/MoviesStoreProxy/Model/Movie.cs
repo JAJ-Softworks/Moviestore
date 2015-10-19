@@ -26,6 +26,6 @@ namespace MoviesStoreProxy.Model
         public virtual List <Genre> genres { get; set; }
 
         public virtual List<OrderLine> orderLines { get; set; }
-
+        public Genre Genre { get; internal set; }
     }
 }

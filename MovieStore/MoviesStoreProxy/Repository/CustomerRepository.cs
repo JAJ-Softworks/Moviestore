@@ -29,6 +29,10 @@ namespace MoviesStoreProxy.Repository
                 return ctx.Customers.ToList();
             }
         }
+        public Customer ReadAll(int? id)
+        {
+            throw new NotImplementedException();
+        }
 
         public Customer GetCustomer(int id)
         {
@@ -38,6 +42,9 @@ namespace MoviesStoreProxy.Repository
                 return ctx.Customers.Where(x => x.Id == id).FirstOrDefault();
             }
         }
+
+       
+
         public void UpdateCustomer(Customer customer)
         {
 
@@ -65,4 +72,4 @@ namespace MoviesStoreProxy.Repository
             }
         }
     }
-}
+    }

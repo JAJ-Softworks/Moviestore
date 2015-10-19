@@ -26,13 +26,7 @@ namespace MoviesStoreProxy.Repository
                 return ctx.Movies.ToList();
             }
         }
-        //public List<Movie> GetMovies()
-        //{
-        //    using (var ctx = new MovieStoreContext())
-        //    {
-        //        return ctx.Movies.ToList();
-        //    }
-        //}
+       
         public Movie GetMovie(int id)
         {
             using (var ctx = new MovieStoreContext())
@@ -52,7 +46,7 @@ namespace MoviesStoreProxy.Repository
                 m.Price = movie.Price;
                 m.Year = movie.Year;
                 m.TralierUrl = movie.TralierUrl;
-                m.genre = movie.genre;
+                m.Genre = movie.Genre;
                 ctx.SaveChanges();
             }
         }
