@@ -15,9 +15,9 @@ namespace MoviesStoreProxy.Context
         public MovieStoreContext() : base("MovieStore")
         {
             Database.SetInitializer(new MovieDBInitialize());
-            Database.SetInitializer(new CustomerDBInitialize());
-            Database.SetInitializer(new OrderDBInitialize());
-            Database.SetInitializer(new GenreDBInitialize());
+            //Database.SetInitializer(new CustomerDBInitialize());
+            //Database.SetInitializer(new OrderDBInitialize());
+            //Database.SetInitializer(new GenreDBInitialize());
 
 
         }
@@ -25,7 +25,7 @@ namespace MoviesStoreProxy.Context
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<OrderLine> OrderLine { get; set; }
+        public DbSet<OrderLine> OrderLines { get; set; }
 
     }
 }

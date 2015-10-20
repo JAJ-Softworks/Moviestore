@@ -44,7 +44,7 @@ namespace MoviesStoreProxy.Repository
         using (var ctx = new MovieStoreContext())
         {
             Order m = ctx.Orders.Where(x => x.Id == order.Id).First();
-            m.customer = order.customer;
+            m.Customer = order.Customer;
             m.orderLines = order.orderLines;
             m.date = order.date;
             m.Id = order.Id;

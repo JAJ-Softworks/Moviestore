@@ -13,17 +13,18 @@ namespace MoviesStoreProxy.Context
 
         protected override void Seed(MovieStoreContext context)
         {
-            IList<Order> orders = new List<Order>();
+            //    IList<Order> orders = new List<Order>();
 
-            orders.Add(new Order() {Id = 1, date = DateTime.Now.AddYears(-25), });
-            orders.Add(new Order() {Id = 2 , date = DateTime.Now.AddYears(-15), });
-            orders.Add(new Order() {Id = 3, date = DateTime.Now.AddYears(-10), });
+            //    orders.Add(new Order() {Id = 1, date = DateTime.Now.AddYears(-25), });
+            //    orders.Add(new Order() {Id = 2 , date = DateTime.Now.AddYears(-15), });
+            //    orders.Add(new Order() {Id = 3, date = DateTime.Now.AddYears(-10), });
 
 
-            foreach (Order o in orders)
-                context.Orders.Add(o);
+            //    foreach (Order o in orders)
+            //        context.Orders.Add(o);
 
-            base.Seed(context);
+            //    base.Seed(context);
         }
     }
 }
+//}

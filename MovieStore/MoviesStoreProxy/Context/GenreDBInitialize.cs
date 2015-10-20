@@ -10,17 +10,17 @@ namespace MoviesStoreProxy.Context
 {
    public class GenreDBInitialize : DropCreateDatabaseAlways<MovieStoreContext>
     {
-        protected override void Seed(MovieStoreContext context)
-        {
-            IList<Genre> geners = new List<Genre>();
+    //    protected override void Seed(MovieStoreContext context)
+    //    {
+    //        IList<Genre> geners = new List<Genre>();
 
           
             
-            foreach (Genre g in geners)
-               context.Genres.Add(g);
+    //        foreach (Genre g in geners)
+    //           context.Genres.Add(g);
 
-            base.Seed(context);
+    //        base.Seed(context);
         }
     }
-}
+//}
    
