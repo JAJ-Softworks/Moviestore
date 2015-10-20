@@ -1,4 +1,5 @@
 ﻿using MoviesStoreProxy.Model;
+using MovieStoreTest;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -23,7 +24,8 @@ namespace MoviesStoreProxy.Context
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Genre> Gernes { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<OrderLine> OrderLine { get; set; }
 
     }
 }

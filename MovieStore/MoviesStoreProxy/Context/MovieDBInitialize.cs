@@ -15,9 +15,9 @@ namespace MoviesStoreProxy.Context
         {
             IList<Movie> movies = new List<Movie>();
 
-            Genre g1 = context.Gernes.Add(new Genre() { Name = "Action" });
-            Genre g2 = context.Gernes.Add(new Genre() { Name = "Horror" });
-            Genre g3 = context.Gernes.Add(new Genre() { Name = "Romance" });
+            Genre g1 = context.Genres.Add(new Genre() { Name = "Action" });
+            Genre g2 = context.Genres.Add(new Genre() { Name = "Horror" });
+            Genre g3 = context.Genres.Add(new Genre() { Name = "Romance" });
 
             context.Movies.Add(new Movie() { Price = 102, Genre = g1, Title = "Taken 3", Year = 2013 ,ImageUrl = "" , TralierUrl = ""});
             context.Movies.Add(new Movie() { Price = 103, Genre = g1, Title = "Terminator 4", Year = 2014 , ImageUrl = "", TralierUrl = ""});

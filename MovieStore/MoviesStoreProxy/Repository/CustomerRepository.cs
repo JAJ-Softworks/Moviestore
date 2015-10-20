@@ -29,10 +29,6 @@ namespace MoviesStoreProxy.Repository
                 return ctx.Customers.ToList();
             }
         }
-        public Customer ReadAll(int? id)
-        {
-            throw new NotImplementedException();
-        }
 
         public Customer GetCustomer(int id)
         {

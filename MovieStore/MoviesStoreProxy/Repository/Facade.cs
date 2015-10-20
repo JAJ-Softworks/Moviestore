@@ -50,5 +50,10 @@ namespace MoviesStoreProxy.Repository
             }
             return orderRepo;
         }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
