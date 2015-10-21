@@ -10,9 +10,9 @@ namespace MoviesStoreProxy.Context
         protected override void Seed(MovieStoreContext context)
         {
 
-            Genre g1 = context.Genres.Add(new Genre() { Id = 1,Name = "Action" });
-            Genre g2 = context.Genres.Add(new Genre() {Id = 2, Name = "Horror" });
-            Genre g3 = context.Genres.Add(new Genre() { Id = 3, Name = "Romance" });
+            context.Genres.Add(new Genre() { Id = 1, Name = "Action" });
+            context.Genres.Add(new Genre() { Id = 2, Name = "Horror" });
+            context.Genres.Add(new Genre() { Id = 3, Name = "Romance" });
 
 
             context.Genres.Add(new Genre() { Id = 1, Name = "Action" });

@@ -12,8 +12,12 @@ namespace MovieShopAssignment.Controllers
     {
         //
         // GET: /Movie/
-        public ActionResult Index()
+        public ActionResult Index(int? GenreID)
         {
+            if(GenreID != null)
+            {
+                return View(Models.FakeDB.GetInstance().GetAllMovies().Where(m => m.Genre.ID == GenreID));
+            }
             return View(Models.FakeDB.GetInstance().GetAllMovies());
         }
         public ActionResult AddToCart(int movID)
@@ -27,6 +31,15 @@ namespace MovieShopAssignment.Controllers
             Session["ShoppingCart"] = cart;
             return RedirectToAction("Index");
         }
+        //[HttpGet]
+        //public ActionResult GenreChosen(int? GenreID)
+        //{
+        //    if(GenreID != null)
+        //    {
+        //        return View(Models.FakeDB.GetInstance().GetAllMovies().Where(g => g.Genre.ID == GenreID));
+        //    }
+        //    return RedirectToAction("Index");
+        //}
         
 	}
 }

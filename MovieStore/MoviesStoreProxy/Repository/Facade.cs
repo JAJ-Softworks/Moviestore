@@ -18,6 +18,17 @@ namespace MoviesStoreProxy.Repository
             return movieRepo;
         }
 
+        private OrderLineRepository OLRepo;
+
+        public OrderLineRepository GetOrderLineRepository()
+        {
+            if (OLRepo == null)
+            {
+                OLRepo = new OrderLineRepository();
+            }
+            return OLRepo;
+        }
+
         private CustomerRepository customerRepo;
 
         public CustomerRepository GetCustomerRepository()

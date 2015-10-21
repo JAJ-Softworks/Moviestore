@@ -61,6 +61,7 @@
     <Compile Include="Repository\Facade.cs" />
     <Compile Include="Repository\GenreRepository.cs" />
     <Compile Include="Repository\MovieRepository.cs" />
+    <Compile Include="Repository\OrderLineRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>

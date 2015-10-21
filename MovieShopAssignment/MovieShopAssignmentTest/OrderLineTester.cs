@@ -14,7 +14,7 @@ namespace MovieShopAssignmentTest
         [Test]
         public void OrderLinePropertiesSetTest()
         {
-            Movie mov = new Movie() { ID = 0, Title = "Tits Galore", Genre = "Children's Education", ImageURL = null, TrailerURL = null, Price = (59.99), Year = 1993 };
+            Movie mov = new Movie() { ID = 0, Title = "Tits Galore", Genre = FakeDB.GetInstance().FindGenreByName("Comedy"), ImageURL = null, TrailerURL = null, Price = (59.99), Year = 1993 };
             OrderLine line = new OrderLine(mov, 1);
 
             Assert.AreEqual(line.Movie, mov);

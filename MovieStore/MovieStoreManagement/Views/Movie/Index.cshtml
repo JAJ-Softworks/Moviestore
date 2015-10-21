@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Movies</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class="btn btn-default btn-lg"})
 </p>
 <table class="table">
     <tr>
@@ -16,6 +16,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -37,6 +40,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Year)
         </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre.Name)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
@@ -47,9 +54,8 @@
             @Html.DisplayFor(modelItem => item.TralierUrl)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
         </td>
     </tr>
 }
