@@ -1,20 +1,27 @@
-﻿@model IEnumerable<MoviesStoreProxy.Model.Movie>
-@using MovieShopAssignment.Models
+﻿@model IEnumerable<MovieShopAssignment.ViewModels.MovieViewModel>
+@using MoviesStoreProxy.Model;
+@using MovieShopAssignment.Repository;
 @{
     ViewBag.Title = "Movies";
 }
 
 <h2>Movies</h2>
-<form action="Index">
+
+@* BUG - Each time you filter it adds a Movie/ to the url, which is no problem the first time, because it results in Movie/Index,
+    but the second time, it results in Movie/Movie/Index, and if it could, it would give you Movie/Movie/Movie/Index, and so on.
+    Tried specifying an absolute route in RouteConfig.cs to fix the bug by rerouting from Movie/Movie/Index to just Movie/Index,
+    but it did not work, and there is no time to fix the bug. For now, just manually delete the extra Movie/ from the URL. Sorry. *@
+<form action="~/Movie/Index">
 
     <fieldset>
         Filter by genre: <select id="GenreID" name="GenreID">
 
-            <option value=""></option>
-            @foreach(Genre genre in FakeDB.GetInstance().GenreList)
-            {
-                <option value="@genre.ID">@genre.Name</option>
-            }
+        <option value=""></option>
+        @foreach(Genre genre in GenreRepository.getInstance().GetAll())
+        {
+            <option value="@genre.Id">@genre.Name</option>
+        }
+
 
         </select>
 
@@ -28,13 +35,13 @@
         <th>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title) and @Html.DisplayNameFor(model => model.Year)
+            @Html.DisplayNameFor(model => model.Movie.Title) and @Html.DisplayNameFor(model => model.Movie.Year)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Genre.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Movie.Price)
         </th>
         <th>
             Watch Trailer
@@ -47,34 +54,34 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @if (item.ImageUrl != null)
+            @if (item.Movie.ImageUrl != null && item.Movie.ImageUrl.Count() > 0)
 {
-    <a href="@item.ImageUrl" target="_blank">
-        <img src="@item.ImageUrl" width="100" />
-    </a>
+            <a href="@item.Movie.ImageUrl" target="_blank">
+                <img src="@item.Movie.ImageUrl" width="100" />
+            </a>
 }
             
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title) (@Html.DisplayFor(modelItem => item.Year))            
+            @Html.DisplayFor(modelItem => item.Movie.Title) (@Html.DisplayFor(modelItem => item.Movie.Year))            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Genre.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            @Html.DisplayFor(modelItem => item.Movie.Price)
         </td>
         <td>
-            @if (item.TrailerUrl != null)
+            @if (item.Movie.TralierUrl != null && item.Movie.TralierUrl.Count() > 0)
             {
                 
-                if(!item.TrailerUrl.Contains("http://") && !item.TrailerUrl.Contains("https://"))
+                if(!item.Movie.TralierUrl.Contains("http://") && !item.Movie.TralierUrl.Contains("https://"))
                 {
-                    <a href="http://@item.TrailerURL" target="_blank">Video Source</a>
+                    <a href="http://@item.Movie.TralierUrl" target="_blank">Video Source</a>
                 }
                 else
                 {
-                    <a href="@item.TrailerURL" target="_blank">Video Source</a>    
+                    <a href="@item.Movie.TralierUrl" target="_blank">Video Source</a>    
                 }
                 
             }                
@@ -84,7 +91,7 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Add to Cart", "AddToCart", new { movID = item.ID })
+            @Html.ActionLink("Add to Cart", "AddToCart", new { movID = item.Movie.Id })
         </td>
     </tr>
 

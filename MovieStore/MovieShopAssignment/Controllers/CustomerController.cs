@@ -19,9 +19,9 @@ namespace MovieShopAssignment.Controllers
         {
             return RedirectToAction("Index", FakeDB.GetInstance().FindCustomerByMail("janetisabitch@bitch.com"));
         }
-        public ActionResult Confirm(Order order)
-        {
-            return View();
-        }
+        //public ActionResult Confirm(Order order)
+        //{
+        //    return View();
+        //}
 	}
 }

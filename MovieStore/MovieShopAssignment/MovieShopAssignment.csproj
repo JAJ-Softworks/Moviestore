@@ -133,12 +133,12 @@
     <Compile Include="Models\FakeDB.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderLine.cs" />
-    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Repository\GenreRepository.cs" />
+    <Compile Include="Repository\MovieRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\OrderLineViewModel.cs" />
-    <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingCart.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
