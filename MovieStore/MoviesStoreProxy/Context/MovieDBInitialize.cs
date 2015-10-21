@@ -18,10 +18,10 @@ namespace MoviesStoreProxy.Context
             context.Genres.Add(new Genre() { Id = 2, Name = "Horror" });
             context.Genres.Add(new Genre() { Id = 3, Name = "Romance" });
 
-            context.Movies.Add(new Movie() { Id = 1, Price = 102, Genre = 1, Title = "Taken 3", Year = 2013, ImageUrl = "", TralierUrl = "" });
-            context.Movies.Add(new Movie() { Id = 2, Price = 103, Genre = 1, Title = "Terminator 4", Year = 2014, ImageUrl = "", TralierUrl = "" });
-            context.Movies.Add(new Movie() { Id = 3, Price = 110, Genre = 3, Title = "Love you", Year = 2015, ImageUrl = "", TralierUrl = "" });
-            context.Movies.Add(new Movie() { Id = 4, Price = 130, Genre = 2, Title = "Die", Year = 2015, ImageUrl = "", TralierUrl = "" });
+            context.Movies.Add(new Movie() { Id = 1, Price = 102, GenreId = 1, Title = "Taken 3", Year = 2013, ImageUrl = "", TralierUrl = "" });
+            context.Movies.Add(new Movie() { Id = 2, Price = 103, GenreId = 1, Title = "Terminator 4", Year = 2014, ImageUrl = "", TralierUrl = "" });
+            context.Movies.Add(new Movie() { Id = 3, Price = 110, GenreId = 3, Title = "Love you", Year = 2015, ImageUrl = "", TralierUrl = "" });
+            context.Movies.Add(new Movie() { Id = 4, Price = 130, GenreId = 2, Title = "Die", Year = 2015, ImageUrl = "", TralierUrl = "" });
 
             context.Customers.Add(new Customer() { Id = 1, FirstName = "Abdirahman", LastName = "Yusuf", Address = " Spangsbjerg Kirkevej 101, 6700 Aarhus", Email = "abdi1500@easv365.dk" });
             context.Customers.Add(new Customer() { Id = 2, FirstName = "Joakim", LastName = "Christensen", Address = " Spangsbjerg 104, 6700 Esbjerg", Email = "joakim1234@easv365.dk" });

@@ -42,7 +42,7 @@ namespace MoviesStoreProxy.Repository
     {
         using (var ctx = new MovieStoreContext())
         {
-            return ctx.Orders.Where(x => x.OrderId == id).FirstOrDefault();
+            return ctx.Orders.Where(x => x.Id == id).FirstOrDefault();
         }
     }
 
@@ -51,11 +51,11 @@ namespace MoviesStoreProxy.Repository
 
         using (var ctx = new MovieStoreContext())
         {
-            Order m = ctx.Orders.Where(x => x.OrderId == order.OrderId).First();
+            Order m = ctx.Orders.Where(x => x.Id == order.Id).First();
             m.customer = order.customer;
             m.orderLines = order.orderLines;
             m.date = order.date;
-            m.OrderId = order.OrderId;
+            m.Id = order.Id;
             ctx.SaveChanges();
         }
     }
@@ -65,7 +65,7 @@ namespace MoviesStoreProxy.Repository
         using (var ctx = new MovieStoreContext())
         {
 
-            Order m = ctx.Orders.Where(x => x.OrderId == id).First();
+            Order m = ctx.Orders.Where(x => x.Id == id).First();
             if (m != null)
                 ctx.Orders.Remove(m);
             ctx.SaveChanges();

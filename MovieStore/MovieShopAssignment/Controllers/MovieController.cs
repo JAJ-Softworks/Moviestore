@@ -19,7 +19,7 @@ namespace MovieShopAssignment.Controllers
             if(GenreID != null)
             {
                 //return View(Models.FakeDB.GetInstance().GetAllMovies().Where(m => m.Genre.ID == GenreID));
-                return View(fac.GetMovieRepository().ReadAll().Where(m => m.Genre.GenreId == GenreID));
+                return View(fac.GetMovieRepository().ReadAll().Where(m => m.Genre.Id == GenreID));
             }
             return View(fac.GetMovieRepository().ReadAll());
         }

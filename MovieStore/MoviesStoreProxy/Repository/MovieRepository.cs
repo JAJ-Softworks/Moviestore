@@ -34,7 +34,7 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                return ctx.Movies.Where(x => x.MovieId == id).Include(a => a.Genre).FirstOrDefault();
+                return ctx.Movies.Where(x => x.Id == id).Include(a => a.Genre).FirstOrDefault();
             }
         }
         public void UpdateMovie(Movie movie)
@@ -52,7 +52,7 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                Movie m = ctx.Movies.Where(x => x.MovieId == id).First();
+                Movie m = ctx.Movies.Where(x => x.Id == id).First();
                 if (m != null)
                     ctx.Movies.Remove(m);
                 ctx.SaveChanges();
