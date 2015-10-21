@@ -18,17 +18,6 @@ namespace MoviesStoreProxy.Repository
             return movieRepo;
         }
 
-        private OrderLineRepository OLRepo;
-
-        public OrderLineRepository GetOrderLineRepository()
-        {
-            if (OLRepo == null)
-            {
-                OLRepo = new OrderLineRepository();
-            }
-            return OLRepo;
-        }
-
         private CustomerRepository customerRepo;
 
         public CustomerRepository GetCustomerRepository()
@@ -60,6 +49,21 @@ namespace MoviesStoreProxy.Repository
                 orderRepo = new OrderRepository();
             }
             return orderRepo;
+        }
+
+        private OrderLineRepository orderLineRepo;
+        public OrderLineRepository GetOrderLineRepository()
+        {
+            if(orderLineRepo == null)
+            {
+                orderLineRepo = new OrderLineRepository();
+            }
+            return orderLineRepo;
+        }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }

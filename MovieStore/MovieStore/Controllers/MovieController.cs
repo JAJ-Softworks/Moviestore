@@ -1,6 +1,7 @@
 ﻿using MoviesStoreProxy.Model;
 using MoviesStoreProxy.Repository;
 using MovieStore.Models;
+using MovieStoreTest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,31 +13,31 @@ namespace MovieStore.Controllers
 {
     public class MovieController : Controller
     {
-
         private Facade facade = new Facade();
      
         // GET: Movie
         public ActionResult Index()
         {
             ShoppingCart cart = new ShoppingCart();
+            cart.AddOrderLine(new OrderLine()
+            {
+                Movie = new Movie() { Id = 1, Title = "Taken 3" },
+                Amount = 10
+            });
             cart.AddOrderLine(new OrderLine());
-            {
-
-                var Movie  = new Movie() { Id = 1, Title = "Taken 3" };
-                //Amount = 10;
-            };
-             cart.AddOrderLine(new OrderLine());
-           
 
             {
-                var Movie = new Movie() { Id = 2, Title = "Terminator 4" };
-                //Amount = 12;
-            };
-            Session["ShoppingCart"] = cart;
-            List<Movie> movies = facade.GetMovieRepository().ReadAll();
-            return View(movies);
+                cart.AddOrderLine(new OrderLine()
+                {
+                    Movie = new Movie() { Id = 2, Title = "Terminator 4" },
+                    Amount = 12
+                });
+                Session["ShoppingCart"] = cart;
+                List<Movie> movies = facade.GetMovieRepository().ReadAll();
+                return View(movies);
+            }
         }
-    
+
         [HttpGet]
         public ActionResult Create()
         {
