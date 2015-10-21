@@ -15,7 +15,7 @@ namespace MovieStoreTest
         public void orderline_properties_set_test()
         { 
             OrderLine line = new OrderLine();
-            var movie = new Movie() { Id = 1, Title = "Bog Foot" };
+            var movie = new Movie() { MovieId = 1, Title = "Bog Foot" };
             line.Movie = movie;
             line.Amount = 10;
 

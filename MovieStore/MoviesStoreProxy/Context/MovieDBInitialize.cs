@@ -15,9 +15,9 @@ namespace MoviesStoreProxy.Context
         {
           //  IList<Movie> movies = new List<Movie>();
 
-            Genre g1 = context.Genres.Add(new Genre() { Id = 1,Name = "Action" });
-            Genre g2 = context.Genres.Add(new Genre() {Id = 2, Name = "Horror" });
-            Genre g3 = context.Genres.Add(new Genre() { Id = 3, Name = "Romance" });
+            Genre g1 = context.Genres.Add(new Genre() { GenreId = 1,Name = "Action" });
+            Genre g2 = context.Genres.Add(new Genre() {GenreId = 2, Name = "Horror" });
+            Genre g3 = context.Genres.Add(new Genre() { GenreId = 3, Name = "Romance" });
 
             context.Movies.Add(new Movie() { Price = 102, Genre = g1, Title = "Taken 3", Year = 2013 ,ImageUrl = "" , TralierUrl = ""});
             context.Movies.Add(new Movie() { Price = 103, Genre = g1, Title = "Terminator 4", Year = 2014 , ImageUrl = "", TralierUrl = ""});
@@ -28,9 +28,9 @@ namespace MoviesStoreProxy.Context
             context.Customers.Add(new Customer() { FirstName = "Joakim", LastName = "Christensen", Address = " Spangsbjerg 104, 6700 Esbjerg", Email = "joakim1234@easv365.dk" });
             context.Customers.Add(new Customer() { FirstName = "Josef", LastName = "Gharib", Address = " Kirkevej 91, 6700 Esbjerg", Email = "josef452@easv365.dk" });
 
-            context.Orders.Add(new Order() { Id = 1, date = DateTime.Now.AddYears(-25), });
-            context.Orders.Add(new Order() { Id = 2, date = DateTime.Now.AddYears(-15), });
-            context.Orders.Add(new Order() { Id = 3, date = DateTime.Now.AddYears(-10), });
+            context.Orders.Add(new Order() { OrderId = 1, CustomerId= 1, date = DateTime.Now.AddYears(-25), });
+            context.Orders.Add(new Order() { OrderId = 2, CustomerId = 2, date = DateTime.Now.AddYears(-15), });
+            context.Orders.Add(new Order() { OrderId = 3, CustomerId = 3, date = DateTime.Now.AddYears(-10), });
 
             //    foreach (Movie m in movies)
             //      context.Movies.Add(m);

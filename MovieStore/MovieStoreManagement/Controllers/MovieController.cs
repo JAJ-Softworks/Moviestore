@@ -17,70 +17,63 @@ namespace MovieStoreManagement.Controllers
             return View(fac.GetMovieRepository().ReadAll());
         }
 
-        // GET: Movie/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Movie/Create
+        [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "GenreId", "Name");
             return View();
         }
 
         // POST: Movie/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Movie mov,FormCollection collection)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                fac.GetMovieRepository().Add(mov);
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "GenreId", "Name");
+            return View();
         }
 
         // GET: Movie/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var movie = fac.GetMovieRepository().GetMovie(id);
+            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "GenreId", "Name", movie);
+            return View(movie);
         }
 
         // POST: Movie/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Movie movie)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                fac.GetMovieRepository().UpdateMovie(movie);
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "GenreId", "Name", movie);
+            return View();
+            
         }
 
         // GET: Movie/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            var movie = fac.GetMovieRepository().GetMovie(id);
+            return View(movie);
         }
-
-        // POST: Movie/Delete/5
+        
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                fac.GetMovieRepository().DeleteMovie(id);
                 return RedirectToAction("Index");
             }
             catch

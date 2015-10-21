@@ -2,6 +2,7 @@
 using MoviesStoreProxy.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace MoviesStoreProxy.Repository
         {
             using (var ctx = new MovieStoreContext())
             {
-                return ctx.Movies.ToList();
+                return ctx.Movies.Include(a => a.Genre).ToList();
             }
 
         }
@@ -33,7 +34,7 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                return ctx.Movies.Where(x => x.Id == id).FirstOrDefault();
+                return ctx.Movies.Where(x => x.MovieId == id).Include(a => a.Genre).FirstOrDefault();
             }
         }
         public void UpdateMovie(Movie movie)
@@ -41,13 +42,14 @@ namespace MoviesStoreProxy.Repository
 
             using (var ctx = new MovieStoreContext())
             {
-                Movie m = ctx.Movies.Where(x => x.Id == movie.Id).First();
-                m.ImageUrl = movie.ImageUrl;
-                m.Title = movie.Title;
-                m.Price = movie.Price;
-                m.Year = movie.Year;
-                m.TralierUrl = movie.TralierUrl;
-                m.Genre = movie.Genre;
+                /* Movie m = ctx.Movies.Where(x => x.MovieId == movie.MovieId).First();
+                 m.ImageUrl = movie.ImageUrl;
+                 m.Title = movie.Title;
+                 m.Price = movie.Price;
+                 m.Year = movie.Year;
+                 m.TralierUrl = movie.TralierUrl;
+                 m.Genre = movie.Genre;*/
+                ctx.Entry(movie).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
@@ -57,7 +59,7 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                Movie m = ctx.Movies.Where(x => x.Id == id).First();
+                Movie m = ctx.Movies.Where(x => x.MovieId == id).First();
                 if (m != null)
                     ctx.Movies.Remove(m);
                 ctx.SaveChanges();
