@@ -1,0 +1,94 @@
+﻿@model IEnumerable<MovieShopAssignment.Models.Movie>
+@using MovieShopAssignment.Models
+@{
+    ViewBag.Title = "Movies";
+}
+
+<h2>Movies</h2>
+<form action="Index">
+
+    <fieldset>
+        Filter by genre: <select id="GenreID" name="GenreID">
+
+            <option value=""></option>
+            @foreach(Genre genre in FakeDB.GetInstance().GenreList)
+            {
+                <option value="@genre.ID">@genre.Name</option>
+            }
+
+        </select>
+
+        <input type="submit" value="Submit" /> 
+
+    </fieldset>
+
+</form>
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title) and @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            Watch Trailer
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.ImageURL != null)
+{
+    <a href="@item.ImageURL" target="_blank">
+        <img src="@item.ImageURL" width="100" />
+    </a>
+}
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title) (@Html.DisplayFor(modelItem => item.Year))            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @if (item.TrailerURL != null)
+            {
+                
+                if(!item.TrailerURL.Contains("http://") && !item.TrailerURL.Contains("https://"))
+                {
+                    <a href="http://@item.TrailerURL" target="_blank">Video Source</a>
+                }
+                else
+                {
+                    <a href="@item.TrailerURL" target="_blank">Video Source</a>    
+                }
+                
+            }                
+            else
+            {
+                <label>No Trailer</label>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Add to Cart", "AddToCart", new { movID = item.ID })
+        </td>
+    </tr>
+
+}
+
+</table>
+
