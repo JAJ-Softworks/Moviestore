@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MoviesStoreProxy.Model;
+using MoviesStoreProxy.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,31 +10,28 @@ namespace MovieStoreManagement.Controllers
 {
     public class OrderLineController : Controller
     {
-        // GET: OrderLine
-        public ActionResult Index()
+        Facade fac = new Facade();
+        public ActionResult Index(int id)
         {
-            return View();
+            return View(fac.GetOrderLineRepository().GetOrderLines(id));
         }
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var OL = fac.GetOrderLineRepository().GetOrderLines(id);
+            return View(OL);
         }
 
         // POST: OrderLine/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(OrderLine OL, FormCollection collection)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                fac.GetOrderLineRepository().UpdateOrderLine(OL);
                 return RedirectToAction("Index");
             }
-            catch
-            {
                 return View();
-            }
         }
 
         // GET: OrderLine/Delete/5

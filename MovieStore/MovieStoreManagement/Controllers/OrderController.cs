@@ -16,31 +16,9 @@ namespace MovieStoreManagement.Controllers
         }
 
         // GET: Order/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int Id)
         {
-            return View();
-        }
-
-        // GET: Order/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Order/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index","OrderLine", new { id = Id});
         }
 
         // GET: Order/Delete/5
