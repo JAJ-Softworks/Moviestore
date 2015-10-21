@@ -24,7 +24,8 @@ namespace MovieStoreManagement.Controllers
         // GET: Order/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var order = fac.GetOrderRepository().GetOrder(id);
+            return View(order);
         }
 
         // POST: Order/Delete/5
@@ -33,8 +34,7 @@ namespace MovieStoreManagement.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                fac.GetOrderRepository().DeleteOrder(id);
                 return RedirectToAction("Index");
             }
             catch

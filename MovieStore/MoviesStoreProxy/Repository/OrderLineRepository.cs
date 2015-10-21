@@ -51,6 +51,15 @@ namespace MoviesStoreProxy.Repository
             }
         }
 
+        public OrderLine GetOrderLine(int id)
+        {
+            using (var ctx = new MovieStoreContext())
+            {
+                var OL = ctx.OrderLines.Where(x => x.OrderId == id).Include(a => a.Movie).FirstOrDefault();
+                return OL;
+            }
+        }
+
         public void DeleteOrderLine(int id)
         {
             using (var ctx = new MovieStoreContext())

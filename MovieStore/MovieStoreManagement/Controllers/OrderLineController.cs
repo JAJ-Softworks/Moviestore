@@ -18,7 +18,9 @@ namespace MovieStoreManagement.Controllers
 
         public ActionResult Edit(int id)
         {
-            var OL = fac.GetOrderLineRepository().GetOrderLines(id);
+
+            var OL = fac.GetOrderLineRepository().GetOrderLine(id);
+            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "MovieId", "Title", OL);
             return View(OL);
         }
 
@@ -31,13 +33,17 @@ namespace MovieStoreManagement.Controllers
                 fac.GetOrderLineRepository().UpdateOrderLine(OL);
                 return RedirectToAction("Index");
             }
-                return View();
+            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "MovieId", "Title", OL);
+
+            return View();
         }
 
         // GET: OrderLine/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            var OL = fac.GetOrderLineRepository().GetOrderLine(id);
+            return View(OL);
         }
 
         // POST: OrderLine/Delete/5
@@ -46,8 +52,7 @@ namespace MovieStoreManagement.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                fac.GetOrderLineRepository().DeleteOrderLine(id);
                 return RedirectToAction("Index");
             }
             catch
@@ -55,5 +60,24 @@ namespace MovieStoreManagement.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "MovieId", "Title");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(OrderLine OL)
+        {
+            if (ModelState.IsValid)
+            {
+                fac.GetOrderLineRepository().Add(OL);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }
