@@ -1,7 +1,6 @@
 ﻿using MoviesStoreProxy.Model;
 using MoviesStoreProxy.Repository;
 using MovieStore.Models;
-using MovieStoreTest;
 using System;
 using System.Collections.Generic;
 using System.Linq;

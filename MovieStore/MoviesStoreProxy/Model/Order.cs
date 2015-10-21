@@ -1,5 +1,4 @@
-﻿using MovieStoreTest;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +14,6 @@ namespace MoviesStoreProxy.Model
         public int Customer { get; set; }
 
         public virtual List<OrderLine> orderLines { get; set; }
-        public OrderLine OrderLine { get; internal set; }
+       // public OrderLine OrderLine { get; internal set; }
     }
 }

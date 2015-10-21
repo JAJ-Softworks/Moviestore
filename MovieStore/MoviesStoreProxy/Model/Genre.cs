@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace MoviesStoreProxy.Model
 {
-   public  class Genre
+   public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual List<Movie> movies { get; set;}
-
-
     }
 }

@@ -2,6 +2,7 @@
 using MoviesStoreProxy.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,7 +12,10 @@ namespace MovieStore.Controllers
 {
     public class CustomerController : Controller
     {
+
+  // GET: Customers
         private Facade facade = new Facade();
+
 
         // GET: Customer
         public ActionResult Index()

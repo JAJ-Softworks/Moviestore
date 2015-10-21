@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieStoreTest
+namespace MoviesStoreProxy.Model
 {
-   public  class OrderLine
+   public class OrderLine
     {
-        //private int Id { get; set; }
+        
         [Column(Order = 1), Key, ForeignKey("Movie")]
         public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }

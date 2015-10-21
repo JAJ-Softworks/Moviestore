@@ -25,6 +25,7 @@ namespace MoviesStoreProxy.Repository
             {
                 return ctx.Movies.ToList();
             }
+
         }
        
         public Movie GetMovie(int id)
