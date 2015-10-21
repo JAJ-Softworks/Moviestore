@@ -36,7 +36,7 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                return ctx.Genres.Where(x => x.Id == id).FirstOrDefault();
+                return ctx.Genres.Where(x => x.GenreId == id).FirstOrDefault();
             }
         }
 
@@ -46,8 +46,8 @@ namespace MoviesStoreProxy.Repository
 
             using (var ctx = new MovieStoreContext())
             {
-                Genre m = ctx.Genres.Where(x => x.Id == genre.Id).First();
-                m.Id = genre.Id;
+                Genre m = ctx.Genres.Where(x => x.GenreId == genre.GenreId).First();
+                m.GenreId = genre.GenreId;
                 m.Name = genre.Name;
                 ctx.SaveChanges();
             }
@@ -58,7 +58,7 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                Genre m = ctx.Genres.Where(x => x.Id == id).First();
+                Genre m = ctx.Genres.Where(x => x.GenreId == id).First();
                 if (m != null)
                     ctx.Genres.Remove(m);
                 ctx.SaveChanges();

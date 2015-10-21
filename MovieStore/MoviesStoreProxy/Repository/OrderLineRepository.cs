@@ -9,56 +9,61 @@ using System.Threading.Tasks;
 
 namespace MoviesStoreProxy.Repository
 {
-    public class MovieRepository
+    public class OrderLineRepository
     {
-        public void Add(Movie movie)
+        public void Add(OrderLine OL)
         {
+
             using (var ctx = new MovieStoreContext())
             {
-                ctx.Movies.Add(movie);
+
+                ctx.OrderLines.Add(OL);
                 ctx.SaveChanges();
             }
         }
 
-        public List<Movie> ReadAll()
-        {
-            using (var ctx = new MovieStoreContext())
-            {
-                return ctx.Movies.Include(a => a.Genre).ToList();
-            }
-
-        }
-       
-        public Movie GetMovie(int id)
+        public List<OrderLine> ReadAll()
         {
             using (var ctx = new MovieStoreContext())
             {
 
-                return ctx.Movies.Where(x => x.MovieId == id).Include(a => a.Genre).FirstOrDefault();
+                return ctx.OrderLines.ToList();
             }
         }
-        public void UpdateMovie(Movie movie)
+
+        public List<OrderLine> GetOrderLines(int id)
+        {
+            using (var ctx = new MovieStoreContext())
+            {
+
+                return ctx.OrderLines.Where(x => x.OrderId == id).Include(x => x.Movie).ToList();
+            }
+        }
+
+
+        public void UpdateOrderLine(OrderLine OL)
         {
 
             using (var ctx = new MovieStoreContext())
             {
-                ctx.Entry(movie).State = EntityState.Modified;
+                ctx.Entry(OL).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
 
-        public void DeleteMovie(int id)
+        public void DeleteOrderLine(int id)
         {
             using (var ctx = new MovieStoreContext())
             {
 
-                Movie m = ctx.Movies.Where(x => x.MovieId == id).First();
+                OrderLine m = ctx.OrderLines.Where(x => x.OrderId == id).FirstOrDefault();
                 if (m != null)
-                    ctx.Movies.Remove(m);
+                    ctx.OrderLines.Remove(m);
                 ctx.SaveChanges();
             }
         }
 
     }
 }
+
 
