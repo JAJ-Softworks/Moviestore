@@ -22,8 +22,6 @@ namespace MoviesStoreProxy.Model
         public string ImageUrl { get; set; }
         public string TralierUrl { get; set; }
 
-      //public virtual List <Genre> genres { get; set; }
-
         public virtual List<OrderLine> orderLines { get; set; }
 
         public virtual Genre Genre { get; set; }

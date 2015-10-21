@@ -11,9 +11,7 @@ namespace MoviesStoreProxy.Model
     {
         public int Id { get; set; }
         public DateTime date { get; set; }
-
-
-        public virtual Customer customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
         public virtual List<OrderLine> orderLines { get; set; }
 

@@ -46,7 +46,7 @@ namespace MoviesStoreProxy.Repository
                 m.Price = movie.Price;
                 m.Year = movie.Year;
                 m.TralierUrl = movie.TralierUrl;
-                m.GenreId = movie.GenreId;
+                m.Genre = movie.Genre;
                 ctx.SaveChanges();
             }
         }
