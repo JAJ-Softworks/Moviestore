@@ -1,5 +1,7 @@
+﻿
 ﻿using MoviesStoreProxy.Model;
 
+﻿using MovieStoreTest;
 using System;
 using System.Collections.Generic;
 

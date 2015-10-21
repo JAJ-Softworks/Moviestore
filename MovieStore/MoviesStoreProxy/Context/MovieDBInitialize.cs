@@ -1,4 +1,5 @@
 ﻿using MoviesStoreProxy.Model;
+using MovieStoreTest;
 using System;
 using System.Data.Entity;
 
@@ -9,6 +10,7 @@ namespace MoviesStoreProxy.Context
 
         protected override void Seed(MovieStoreContext context)
         {
+            //IList<Movie> movies = new List<Movie>();
 
             context.Genres.Add(new Genre() { Id = 1, Name = "Action" });
             context.Genres.Add(new Genre() { Id = 2, Name = "Horror" });
@@ -35,6 +37,7 @@ namespace MoviesStoreProxy.Context
             context.Orders.Add(new Order() { Id = 1, date = DateTime.Now.AddYears(-25), Customer = 3,});
             context.Orders.Add(new Order() { Id = 2, date = DateTime.Now.AddYears(-15), Customer = 2, });
             context.Orders.Add(new Order() { Id = 3, date = DateTime.Now.AddYears(-10), Customer = 1});
+
 
             //foreach (Movie m in movies)
             //    context.Movies.Add(m);

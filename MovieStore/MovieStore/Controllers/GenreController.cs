@@ -1,8 +1,11 @@
-﻿using MoviesStoreProxy.Model;
+﻿using MoviesStoreProxy.Context;
+using MoviesStoreProxy.Model;
 using MoviesStoreProxy.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,58 +13,119 @@ namespace MovieStore.Controllers
 {
     public class GenreController : Controller
     {
+        private MovieStoreContext db = new MovieStoreContext();
+
         private Facade facade = new Facade();
 
-        // GET: Movie
+        // GET: Genres
         public ActionResult Index()
         {
             List<Genre> genres = facade.GetGenryRepository().ReadAll();
             return View(genres);
         }
 
-        [HttpGet]
+        // GET: Genres/Details
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Genre genre = db.Genres.Find(id);
+            if (genre == null)
+            {
+                return HttpNotFound();
+            }
+            return View(genre);
+        }
+
+        // GET: Genres/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        // POST: Genres/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Genre genre)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name")] Genre genre)
         {
-            facade.GetGenryRepository().Add(genre);
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                db.Genres.Add(genre);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(genre);
         }
 
-        [HttpGet]
-        public ActionResult Edit(int Id)
+        // GET: Genres/Edit
+        public ActionResult Edit(int? id)
         {
-            Genre g = facade.GetGenryRepository().GetGenre(Id);
-            return View(g);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Genre genre = db.Genres.Find(id);
+            if (genre == null)
+            {
+                return HttpNotFound();
+            }
+            return View(genre);
         }
 
+        // POST: Genres/Edit
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(Genre genre)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name")] Genre genre)
         {
-            facade.GetGenryRepository().UpdateGenre(genre);
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                db.Entry(genre).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(genre);
         }
 
-        [HttpGet]
-        ///HTTPGet Delete only returns a html page with the yes/no button
-        public ActionResult Delete(int genreId)
+        // GET: Genres/Delete
+        public ActionResult Delete(int? id)
         {
-            Genre g = facade.GetGenryRepository().GetGenre(genreId);
-            return View(genreId);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Genre genre = db.Genres.Find(id);
+            if (genre == null)
+            {
+                return HttpNotFound();
+            }
+            return View(genre);
         }
 
-        [HttpPost]
-        [ActionName("Delete")]
-        ///HTTPPost DeleteAccepted will be hit if the user presses yes on the delete page above.
-        public ActionResult DeleteAccepted(int genreId)
+        // POST: Genres/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            facade.GetGenryRepository().DeleteGenre(genreId);
+            Genre genre = db.Genres.Find(id);
+            db.Genres.Remove(genre);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-            return Redirect("Index");
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

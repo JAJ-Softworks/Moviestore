@@ -1,6 +1,7 @@
 ﻿using MoviesStoreProxy.Model;
 using MoviesStoreProxy.Repository;
 using MovieStore.Models;
+using MovieStoreTest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,6 @@ namespace MovieStore.Controllers
 {
     public class MovieController : Controller
     {
-
         private Facade facade = new Facade();
 
 
@@ -38,6 +38,7 @@ namespace MovieStore.Controllers
                 return View(movies);
             }
         }
+
         [HttpGet]
         public ActionResult Create()
         {

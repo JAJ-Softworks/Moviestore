@@ -1,4 +1,5 @@
-﻿using MoviesStoreProxy.Model;
+﻿using MoviesStoreProxy.Context;
+using MoviesStoreProxy.Model;
 using MoviesStoreProxy.Repository;
 using System;
 using System.Collections.Generic;
@@ -12,57 +13,121 @@ namespace MovieStore.Controllers
 {
     public class CustomerController : Controller
     {
+        private MovieStoreContext db = new MovieStoreContext();
+
 
   // GET: Customers
         private Facade facade = new Facade();
 
 
-        // GET: Customer
         public ActionResult Index()
         {
             List<Customer> customers = facade.GetCustomerRepository().ReadAll();
             return View(customers);
         }
+
+        // GET: Customers/Details
+        public ActionResult Details(int? Id)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(Id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // GET: Customers/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        // POST: Customers/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,Email")] Customer customer)
         {
-            facade.GetCustomerRepository().Add(customer);
-            return Redirect("Index");
+            if (ModelState.IsValid)
+            {
+                db.Customers.Add(customer);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(customer);
         }
 
-        [HttpGet]
-        public ActionResult Edit(int Id)
+        // GET: Customers/Edit
+        public ActionResult Edit(int? Id)
         {
-            Customer c = facade.GetCustomerRepository().GetCustomer(Id);
-            return View();
-
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(Id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
         }
 
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(Customer customer)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id, FirstName, LastName, Address, Email")] Customer customer)
         {
-            facade.GetCustomerRepository().UpdateCustomer(customer);
-            return Redirect("Index");
-
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(customer);
         }
-        public ActionResult Delete(int customerId)
+
+        // GET: Customers/Delete/5
+        public ActionResult Delete(int? Id)
         {
-            Customer c = facade.GetCustomerRepository().GetCustomer(customerId);
-            return View();
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(Id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
         }
 
-        [HttpPost]
-        [ActionName("Delete")]
-        ///HTTPPost DeleteAccepted will be hit if the user presses yes on the delete page above.
-        public ActionResult DeleteAccepted(int customerId)
+        // POST: Customers/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int Id)
         {
-            facade.GetCustomerRepository().DeleteCustomer(customerId);
-            return Redirect("index");
+            Customer customer = db.Customers.Find(Id);
+            db.Customers.Remove(customer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

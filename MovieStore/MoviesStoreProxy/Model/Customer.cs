@@ -17,7 +17,6 @@ namespace MoviesStoreProxy.Model
 
         public virtual List<Order> orders { get; set; }
 
-
     }
 }
 

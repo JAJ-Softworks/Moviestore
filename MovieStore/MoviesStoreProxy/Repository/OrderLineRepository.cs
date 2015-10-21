@@ -1,8 +1,8 @@
 ﻿using MoviesStoreProxy.Context;
+using MovieStoreTest;
 using MoviesStoreProxy.Model;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +11,18 @@ namespace MoviesStoreProxy.Repository
 {
     public class OrderLineRepository
     {
-        public void Add(OrderLine OL)
+        public void Add(OrderLine orderLine)
         {
 
             using (var ctx = new MovieStoreContext())
             {
 
-                ctx.OrderLines.Add(OL);
+                ctx.OrderLines.Add(orderLine);
                 ctx.SaveChanges();
             }
         }
 
-        public List<OrderLine> ReadAll()
+        public List<OrderLine> GetOrderLines()
         {
             using (var ctx = new MovieStoreContext())
             {
@@ -31,32 +31,26 @@ namespace MoviesStoreProxy.Repository
             }
         }
 
-        public List<OrderLine> GetOrderLines(int id)
-        {
-            using (var ctx = new MovieStoreContext())
-            {
-
-                return ctx.OrderLines.Where(x => x.OrderId == id).Include(x => x.Movie).ToList();
-            }
-        }
-
-
-        public void UpdateOrderLine(OrderLine OL)
-        {
-
-            using (var ctx = new MovieStoreContext())
-            {
-                ctx.Entry(OL).State = EntityState.Modified;
-                ctx.SaveChanges();
-            }
-        }
-
         public OrderLine GetOrderLine(int id)
         {
             using (var ctx = new MovieStoreContext())
             {
-                var OL = ctx.OrderLines.Where(x => x.OrderId == id).Include(a => a.Movie).FirstOrDefault();
-                return OL;
+                return ctx.OrderLines.Where(x => x.OrderId == id).FirstOrDefault();
+            }
+        }
+
+        public void UpdateOrderLine(OrderLine orderLine)
+        {
+
+            using (var ctx = new MovieStoreContext())
+            {
+                OrderLine m = ctx.OrderLines.Where(x => x.OrderId == orderLine.OrderId).First();
+                m.Amount = orderLine.Amount;
+                m.OrderId = orderLine.OrderId;
+                m.MovieId = orderLine.MovieId;
+                m.Movie = orderLine.Movie;
+                m.Order = orderLine.Order;
+                ctx.SaveChanges();
             }
         }
 
@@ -65,14 +59,12 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                OrderLine m = ctx.OrderLines.Where(x => x.OrderId == id).FirstOrDefault();
+                OrderLine m = ctx.OrderLines.Where(x => x.OrderId == id).First();
                 if (m != null)
                     ctx.OrderLines.Remove(m);
                 ctx.SaveChanges();
             }
         }
-
     }
 }
-
 

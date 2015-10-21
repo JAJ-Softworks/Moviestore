@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MoviesStoreProxy.Model
+namespace MovieStoreTest
 {
-   public class OrderLine
+   public  class OrderLine
     {
         
         [Column(Order = 1), Key, ForeignKey("Movie")]
