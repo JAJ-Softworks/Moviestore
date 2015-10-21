@@ -13,14 +13,15 @@ namespace MoviesStoreProxy.Context
 
         protected override void Seed(MovieStoreContext context)
         {
-            context.Genres.Add(new Genre() { GenreId = 1, Name = "Action" });
-            context.Genres.Add(new Genre() { GenreId = 2, Name = "Horror" });
-            context.Genres.Add(new Genre() { GenreId = 3, Name = "Romance" });
 
-            context.Movies.Add(new Movie() { MovieId = 1, Price = 102, GenreId = 1, Title = "Taken 3", Year = 2013, ImageUrl = "", TralierUrl = "" });
-            context.Movies.Add(new Movie() { MovieId = 2, Price = 103, GenreId = 1, Title = "Terminator 4", Year = 2014, ImageUrl = "", TralierUrl = "" });
-            context.Movies.Add(new Movie() { MovieId = 3, Price = 110, GenreId = 3, Title = "Love you", Year = 2015, ImageUrl = "", TralierUrl = "" });
-            context.Movies.Add(new Movie() { MovieId = 4, Price = 130, GenreId = 2, Title = "Die", Year = 2015, ImageUrl = "", TralierUrl = "" });
+            context.Genres.Add(new Genre() { Id = 1, Name = "Action" });
+            context.Genres.Add(new Genre() { Id = 2, Name = "Horror" });
+            context.Genres.Add(new Genre() { Id = 3, Name = "Romance" });
+
+            context.Movies.Add(new Movie() { Id = 1, Price = 102, Genre = 1, Title = "Taken 3", Year = 2013, ImageUrl = "", TralierUrl = "" });
+            context.Movies.Add(new Movie() { Id = 2, Price = 103, Genre = 1, Title = "Terminator 4", Year = 2014, ImageUrl = "", TralierUrl = "" });
+            context.Movies.Add(new Movie() { Id = 3, Price = 110, Genre = 3, Title = "Love you", Year = 2015, ImageUrl = "", TralierUrl = "" });
+            context.Movies.Add(new Movie() { Id = 4, Price = 130, Genre = 2, Title = "Die", Year = 2015, ImageUrl = "", TralierUrl = "" });
 
             context.Customers.Add(new Customer() { Id = 1, FirstName = "Abdirahman", LastName = "Yusuf", Address = " Spangsbjerg Kirkevej 101, 6700 Aarhus", Email = "abdi1500@easv365.dk" });
             context.Customers.Add(new Customer() { Id = 2, FirstName = "Joakim", LastName = "Christensen", Address = " Spangsbjerg 104, 6700 Esbjerg", Email = "joakim1234@easv365.dk" });
@@ -30,9 +31,12 @@ namespace MoviesStoreProxy.Context
             context.OrderLines.Add(new OrderLine() { OrderId = 3, MovieId = 4, Amount = 10, });
             context.OrderLines.Add(new OrderLine() { OrderId = 1, MovieId = 3, Amount = 25, });
 
-            context.Orders.Add(new Order() { OrderId = 1, date = DateTime.Now.AddYears(-25), CustomerId = 3, });
-            context.Orders.Add(new Order() { OrderId = 2, date = DateTime.Now.AddYears(-15), CustomerId = 2, });
-            context.Orders.Add(new Order() { OrderId = 3, date = DateTime.Now.AddYears(-10), CustomerId = 1 });
+            context.Orders.Add(new Order() { Id = 1, date = DateTime.Now.AddYears(-25), CustomerId = 3, });
+            context.Orders.Add(new Order() { Id = 2, date = DateTime.Now.AddYears(-15), CustomerId = 2, });
+            context.Orders.Add(new Order() { Id = 3, date = DateTime.Now.AddYears(-10), CustomerId = 1 });
+
+            //foreach (Movie m in movies)
+            //    context.Movies.Add(m);
 
             base.Seed(context);
         }

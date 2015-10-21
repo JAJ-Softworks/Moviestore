@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MovieShopAssignment.Models;
 //using MovieShopAssignment.ViewModels;
+using MoviesStoreProxy.Repository;
 
 namespace MovieShopAssignment.Controllers
 {
@@ -14,11 +15,13 @@ namespace MovieShopAssignment.Controllers
         // GET: /Movie/
         public ActionResult Index(int? GenreID)
         {
+            Facade fac = new Facade();
             if(GenreID != null)
             {
-                return View(Models.FakeDB.GetInstance().GetAllMovies().Where(m => m.Genre.ID == GenreID));
+                //return View(Models.FakeDB.GetInstance().GetAllMovies().Where(m => m.Genre.ID == GenreID));
+                return View(fac.GetMovieRepository().ReadAll().Where(m => m.Genre.GenreId == GenreID));
             }
-            return View(Models.FakeDB.GetInstance().GetAllMovies());
+            return View(fac.GetMovieRepository().ReadAll());
         }
         public ActionResult AddToCart(int movID)
         {

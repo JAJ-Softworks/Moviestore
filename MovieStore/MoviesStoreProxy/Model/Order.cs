@@ -10,7 +10,7 @@ namespace MoviesStoreProxy.Model
     public class Order
     {
         [Key]
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         public DateTime date{ get; set; }
 

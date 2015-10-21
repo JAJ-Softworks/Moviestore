@@ -49,11 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\CustomerDBInitialize.cs" />
-    <Compile Include="Context\GenreDBInitialize.cs" />
     <Compile Include="Context\MovieDBInitialize.cs" />
     <Compile Include="Context\MovieStoreContext.cs" />
-    <Compile Include="Context\OrderDBInitialize.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Genre.cs" />
     <Compile Include="Model\Movie.cs" />

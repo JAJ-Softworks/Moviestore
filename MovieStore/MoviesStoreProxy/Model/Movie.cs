@@ -14,7 +14,7 @@ namespace MoviesStoreProxy.Model
     public class Movie
     {
         [Key]
-        public int MovieId { get; set; }
+        public int Id { get; set; }
         [DisplayName("Genre")]
         public int GenreId { get; set; }
         public string Title { get; set; }
