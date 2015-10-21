@@ -1,10 +1,28 @@
 ﻿@model IEnumerable<MovieShopAssignment.Models.Movie>
+@using MovieShopAssignment.Models
 @{
     ViewBag.Title = "Movies";
 }
 
 <h2>Movies</h2>
+<form action="Index">
 
+    <fieldset>
+        Filter by genre: <select id="GenreID" name="GenreID">
+
+            <option value=""></option>
+            @foreach(Genre genre in FakeDB.GetInstance().GenreList)
+            {
+                <option value="@genre.ID">@genre.Name</option>
+            }
+
+        </select>
+
+        <input type="submit" value="Submit" /> 
+
+    </fieldset>
+
+</form>
 <table class="table">
     <tr>
         <th>
@@ -13,7 +31,7 @@
             @Html.DisplayNameFor(model => model.Title) and @Html.DisplayNameFor(model => model.Year)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genres)
+            @Html.DisplayNameFor(model => model.Genre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -41,15 +59,7 @@
             @Html.DisplayFor(modelItem => item.Title) (@Html.DisplayFor(modelItem => item.Year))            
         </td>
         <td>
-            @foreach(var genre in item.Genres)
-            {
-                @Html.DisplayFor((text => genre.Name))
-                if(genre != item.Genres.LastOrDefault())
-                {
-                    <label>,</label>
-                }
-            }
-            
+            @Html.DisplayFor(modelItem => item.Genre.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
@@ -77,6 +87,8 @@
             @Html.ActionLink("Add to Cart", "AddToCart", new { movID = item.ID })
         </td>
     </tr>
+
 }
 
 </table>
+

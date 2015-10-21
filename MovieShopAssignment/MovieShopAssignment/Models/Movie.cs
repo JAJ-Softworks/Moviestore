@@ -13,6 +13,6 @@ namespace MovieShopAssignment.Models
         public double Price { get; set; }
         public string ImageURL { get; set; }
         public string TrailerURL { get; set; }
-        public List<Genre> Genres { get; set; }
+        public Genre Genre { get; set; }
     }
 }

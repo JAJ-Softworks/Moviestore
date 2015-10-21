@@ -22,11 +22,15 @@ namespace MovieShopAssignment.Controllers
         }
         public ActionResult Checkout()
         {
+            ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
+            Order newOrder = new Order() { OrderLines = cart.OrderLines, Date = DateTime.Now };
             return RedirectToAction("Index", "Customer");
         }
         public ActionResult Clear()
         {
-            Session["ShoppingCart"] = new ShoppingCart();
+            //We just clear the session when you clear the cart
+            //Obviously not the smartest thing to do, but since the only thing the session saves is the cart, it works
+            Session["ShoppingCart"] = new ShoppingCart(); 
             return RedirectToAction("Index");
         }
         public ActionResult Return()
@@ -37,6 +41,21 @@ namespace MovieShopAssignment.Controllers
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
             cart.RemoveOrderLine(cart.OrderLines.FirstOrDefault()); //Obviously not right, just testing
+            Session["ShoppingCart"] = cart;
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult EditView(int Index)
+        {
+            ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
+            OrderLine Line = cart.OrderLines[Index];
+            return View(Line);
+        }
+        [HttpPost]
+        public ActionResult Edit(OrderLine Line)
+        {
+            ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
+            cart.OrderLines.FirstOrDefault(x => x.Movie == Line.Movie).Amount = Line.Amount;
             Session["ShoppingCart"] = cart;
             return RedirectToAction("Index");
         }
