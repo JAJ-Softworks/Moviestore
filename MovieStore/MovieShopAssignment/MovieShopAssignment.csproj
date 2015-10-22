@@ -179,6 +179,7 @@
     <Content Include="Views\ShoppingCart\EditView.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Failure.cshtml" />
+    <Content Include="Views\Checkout\CompleteCheckout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
