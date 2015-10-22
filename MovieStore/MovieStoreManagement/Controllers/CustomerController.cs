@@ -19,7 +19,7 @@ namespace MovieStoreManagement.Controllers
         // GET: Customer/Details/5
         public ActionResult Orders(int Id)
         {
-            return RedirectToAction("Index","Order", new  {id= Id });
+            return RedirectToAction("Index","Order", new  {cus= fac.GetOrderRepository().GetOrdersFromCustomer(fac.GetCustomerRepository().GetCustomer(Id)) });
         }
 
         [HttpGet]

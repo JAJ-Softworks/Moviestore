@@ -1,4 +1,5 @@
-﻿using MoviesStoreProxy.Repository;
+﻿using MoviesStoreProxy.Model;
+using MoviesStoreProxy.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace MovieStoreManagement.Controllers
     public class OrderController : Controller
     {
         Facade fac = new Facade();
-        public ActionResult Index(int id)
+        public ActionResult Index(Customer cus)
         {
-            return View(fac.GetOrderRepository().GetOrdersFromCustomer(id));
+            return View(fac.GetOrderRepository().GetOrdersFromCustomer(cus));
         }
 
         // GET: Order/Details/5
