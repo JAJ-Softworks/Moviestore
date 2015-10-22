@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieStoreProxy.Model
+namespace MoviesStoreProxy.Model
 {
    public  class OrderLine
     {
