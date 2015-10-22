@@ -17,10 +17,10 @@ namespace MovieStoreManagement.Controllers
         }
 
         // GET: Customer/Details/5
-        public ActionResult Orders(int Id)
-        {
-            return RedirectToAction("Index","Order", new  {cus= fac.GetOrderRepository().GetOrdersFromCustomer(fac.GetCustomerRepository().GetCustomer(Id)) });
-        }
+     //   public ActionResult Orders(int Id)
+        //{
+      //      return RedirectToAction("Index","Order", new  {cus= fac.GetOrderRepository().ReadAll().Where(x => x.CustomerId = fac.GetCustomerRepository().GetCustomer(Id) });
+       // }
 
         [HttpGet]
         public ActionResult Create()

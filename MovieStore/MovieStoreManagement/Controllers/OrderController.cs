@@ -13,7 +13,7 @@ namespace MovieStoreManagement.Controllers
         Facade fac = new Facade();
         public ActionResult Index(Customer cus)
         {
-            return View(fac.GetOrderRepository().GetOrdersFromCustomer(cus));
+            return View(fac.GetOrderRepository().ReadAll().Where(x => x.Id == cus.Id));
         }
 
         // GET: Order/Details/5
