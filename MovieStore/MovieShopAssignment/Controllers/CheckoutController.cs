@@ -11,38 +11,45 @@ namespace MovieShopAssignment.Controllers
     public class CheckoutController : Controller
     {
         // GET: Checkout
-        public ActionResult Index(string CustomerMail)
+        public ActionResult Index()
         {
-            if(CustomerMail.Count() > 0)
-            {
-                if(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail) != null)
-                return View(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail));
-            }
-            return View(new CustomerViewModel());
+            return View();
         }
-        public ActionResult CompleteCheckout(CustomerViewModel CustomerVM)
+        public ActionResult CompleteCheckout(string CustomerMail)
         {
-            //This try catch does not catch any exceptions, it is merely a precaution against total failure - if it cannot place the order / get/create the customer / clear the shoppingcart, it will just redirect you to the failure page.
-            try
+            if(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail) != null)
             {
-                ShoppingCart Cart = Session["ShoppingCart"] as ShoppingCart;
-                if (CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerVM.Email) == null)
+                //This try catch does not catch any exceptions, it is merely a precaution against total failure - if it cannot place the order / get the customer's ID / clear the shoppingcart, it will just redirect you to the failure page.
+                try
                 {
-                    CustomerRepository.getInstance().AddCustomer(CustomerVM);
+                    ShoppingCart Cart = Session["ShoppingCart"] as ShoppingCart;
+                    OrderRepository.getInstance().AddOrder(Cart, CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail).ID);
+                    Session["ShoppingCart"] = new ShoppingCart();
+                    return View();
                 }
-                OrderRepository.getInstance().AddOrder(Cart, CustomerVM.ID);
-                Session["ShoppingCart"] = new ShoppingCart();
-                return View();
+                catch
+                {
+                    return RedirectToAction("Failure");
+                }                
             }
-            catch
+            else
             {
-                return RedirectToAction("Failure");
+                //It would be nice if it told you that the mail you typed in did not match a database entry, but for now it just sends you to the form to register a new customer without a warning
+                return RedirectToAction("AddCustomer");
             }
-            
         }
         public ActionResult Failure()
         {
             return View();
+        }
+        public ActionResult AddCustomer()
+        {
+            return View(new CustomerViewModel());
+        }
+        public ActionResult CompleteAddCustomer(CustomerViewModel CustomerVM)
+        {
+            CustomerRepository.getInstance().AddCustomer(CustomerVM);
+            return RedirectToAction("CompleteCheckout", CustomerVM.Email);
         }
     }
 }

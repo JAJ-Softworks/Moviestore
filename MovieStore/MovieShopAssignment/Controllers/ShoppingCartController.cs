@@ -23,7 +23,7 @@ namespace MovieShopAssignment.Controllers
         public ActionResult Checkout()
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Checkout", new { CustomerMail = "null"});
         }
         public ActionResult Clear()
         {

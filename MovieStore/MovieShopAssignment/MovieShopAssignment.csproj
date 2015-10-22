@@ -180,6 +180,7 @@
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Checkout\Failure.cshtml" />
     <Content Include="Views\Checkout\CompleteCheckout.cshtml" />
+    <Content Include="Views\Checkout\AddCustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

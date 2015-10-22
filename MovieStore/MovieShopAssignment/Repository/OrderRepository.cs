@@ -22,7 +22,7 @@ namespace MovieShopAssignment.Repository
             Order newOrder = new Order() { Customer = new Facade().GetCustomerRepository().GetCustomer(CustomerID), date = DateTime.Now };
             new Facade().GetOrderRepository().Add(newOrder);
             //Add the orderlines
-            int OrderID = new Facade().GetOrderRepository().GetOrders().Where(x => x.Customer.Id == CustomerID).OrderBy(x => x.date).LastOrDefault().Id;
+            int OrderID = new Facade().GetOrderRepository().ReadAll().Where(x => x.Customer.Id == CustomerID).OrderBy(x => x.date).LastOrDefault().Id;
             List<OrderLine> OrderLines = new List<OrderLine>();
             foreach (OrderLineViewModel Line in Cart.OrderLines)
             {
