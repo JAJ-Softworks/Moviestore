@@ -1,9 +1,6 @@
-﻿using MovieStoreTest;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MoviesStoreProxy.Model;
 
 namespace MoviesStoreProxy.Model
 {

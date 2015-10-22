@@ -1,5 +1,4 @@
 ﻿using MoviesStoreProxy.Model;
-using MovieStoreTest;
 using System;
 using System.Data.Entity;
 

@@ -1,8 +1,5 @@
 ﻿
-﻿using MoviesStoreProxy.Model;
-
-﻿using MovieStoreTest;
-using System;
+using MoviesStoreProxy.Model;
 using System.Collections.Generic;
 
 namespace MovieStore.Models
