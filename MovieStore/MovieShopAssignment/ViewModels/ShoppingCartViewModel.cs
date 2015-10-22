@@ -8,23 +8,23 @@ namespace MovieShopAssignment.ViewModels
     public class ShoppingCart
     {
         public double Total { get; private set; }
-        public List<OrderLineViewModel> OrderLines { get; set; }
+        public List<OrderLine> OrderLines { get; set; }
         public ShoppingCart()
         {
-            OrderLines = new List<OrderLineViewModel>();
+            OrderLines = new List<OrderLine>();
         }
-        public void AddOrderLine(OrderLineViewModel line)
+        public void AddOrderLine(OrderLine line)
         {
             OrderLines.Add(line);
         }
-        public void RemoveOrderLine(OrderLineViewModel line)
+        public void RemoveOrderLine(OrderLine line)
         {
             OrderLines.Remove(line);
         }
         public double getTotal()
         {
             Total = 0;
-            foreach(OrderLineViewModel line in OrderLines)
+            foreach(OrderLine line in OrderLines)
             {
                 Total += line.getTotal();
             }

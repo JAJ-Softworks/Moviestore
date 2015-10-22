@@ -1,15 +1,14 @@
-﻿@model MovieShopAssignment.ViewModels.OrderLineViewModel
+﻿@model MovieShopAssignment.Models.OrderLine
 
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
-Movie: @Html.DisplayFor(x => Model.MovieVM.Movie.Title), @Html.DisplayFor(x => Model.MovieVM.Movie.Year)<br />
-<form action="~/ShoppingCart/Edit" class="col-md-12">
-    <input type="hidden" class="form-control" name="MovID" value="@Model.MovieVM.Movie.Id" hidden>
+Movie: @Html.DisplayFor(x => Model.Movie.Title), @Html.DisplayFor(x => Model.Movie.Year)<br />
+<form method="Post" action="~/ShoppingCart/Edit" class="col-md-12">
+    <input type="hidden" class="form-control" name="Movie" value="@Model.Movie" hidden>
     Amount: <input type="number" class="form-control" name="Amount" value="@Model.Amount">
-    @*<button type="submit" class="btn btn-default">Confirm</button>*@
-    <input type="submit" value="Submit" /> 
+    <button type="submit" class="btn btn-default">Confirm</button>
 </form>
 @Html.ActionLink("Go Back", "Index");

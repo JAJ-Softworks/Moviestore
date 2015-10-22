@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using MovieShopAssignment.Models;
+using System.Text;
 
-namespace MovieShopAssignment.ViewModels
+namespace MovieShopAssignment.Models
 {
     public class OrderLine
     {
@@ -19,14 +18,6 @@ namespace MovieShopAssignment.ViewModels
         }
         public Movie Movie { get; set; }
 
-        public uint Amount {get; set; }
-
-        public double Total { get; private set; }
- 
-        public double getTotal()
-        {
-            Total = Movie.Price * Amount;
-            return Total;
-        }
+        public uint Amount { get; set; }
     }
 }
