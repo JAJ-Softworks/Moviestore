@@ -20,7 +20,7 @@ namespace MovieStoreManagement.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "GenreId", "Name");
+            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "Id", "Name");
             return View();
         }
 
@@ -33,7 +33,7 @@ namespace MovieStoreManagement.Controllers
                 fac.GetMovieRepository().Add(mov);
                 return RedirectToAction("Index");
             }
-            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "GenreId", "Name");
+            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "Id", "Name");
             return View();
         }
 
@@ -42,7 +42,7 @@ namespace MovieStoreManagement.Controllers
         public ActionResult Edit(int id)
         {
             var movie = fac.GetMovieRepository().GetMovie(id);
-            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "GenreId", "Name", movie);
+            ViewBag.GenreId = new SelectList(fac.GetGenryRepository().ReadAll(), "Id", "Name", movie);
             return View(movie);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using MoviesStoreProxy.Model;
 
 namespace MoviesStoreProxy.Model
 {
@@ -15,10 +16,10 @@ namespace MoviesStoreProxy.Model
         public double Price { get; set; }
         public string ImageUrl { get; set; }
         public string TralierUrl { get; set; }
-
         public virtual List<OrderLine> orderLines { get; set; }
-
+        public int GenreId { get; set; }
         public virtual Genre Genre { get; set; }
 
+        
     }
 }

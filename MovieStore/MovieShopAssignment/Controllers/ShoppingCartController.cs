@@ -23,7 +23,7 @@ namespace MovieShopAssignment.Controllers
         public ActionResult Checkout()
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Checkout", new { CustomerMail = "null"});
         }
         public ActionResult Clear()
         {
@@ -49,7 +49,7 @@ namespace MovieShopAssignment.Controllers
             OrderLineViewModel Line = cart.OrderLines[Index];
             return View(Line);
         }
-        public ActionResult Edit(int MovID, uint Amount)
+        public ActionResult Edit(int MovID, int Amount)
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
             //The only accepted change is if the new amount is greater than 1. If not, it discards the change.

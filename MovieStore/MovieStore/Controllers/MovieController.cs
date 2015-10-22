@@ -1,6 +1,7 @@
 ﻿using MoviesStoreProxy.Model;
 using MoviesStoreProxy.Repository;
 using MovieStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 

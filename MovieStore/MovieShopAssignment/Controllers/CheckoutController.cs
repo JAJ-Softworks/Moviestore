@@ -11,34 +11,45 @@ namespace MovieShopAssignment.Controllers
     public class CheckoutController : Controller
     {
         // GET: Checkout
-        public ActionResult Index(string CustomerMail)
+        public ActionResult Index()
         {
-            if(CustomerMail.Count() > 0)
+            return View();
+        }
+        public ActionResult CompleteCheckout(string CustomerMail)
+        {
+            if(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail) != null)
             {
-                if(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail) != null)
-                return View(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail));
+                //This try catch does not catch any exceptions, it is merely a precaution against total failure - if it cannot place the order / get the customer's ID / clear the shoppingcart, it will just redirect you to the failure page.
+                try
+                {
+                    ShoppingCart Cart = Session["ShoppingCart"] as ShoppingCart;
+                    OrderRepository.getInstance().AddOrder(Cart, CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail).ID);
+                    Session["ShoppingCart"] = new ShoppingCart();
+                    return View();
+                }
+                catch
+                {
+                    return RedirectToAction("Failure");
+                }                
             }
+            else
+            {
+                //It would be nice if it told you that the mail you typed in did not match a database entry, but for now it just sends you to the form to register a new customer without a warning
+                return RedirectToAction("AddCustomer");
+            }
+        }
+        public ActionResult Failure()
+        {
+            return View();
+        }
+        public ActionResult AddCustomer()
+        {
             return View(new CustomerViewModel());
         }
-        public ActionResult CompleteCheckout(CustomerViewModel CustomerVM)
+        public ActionResult CompleteAddCustomer(CustomerViewModel CustomerVM)
         {
-            //This try catch does not catch anything, it is merely a precaution against total failure - if it cannot place the order / get/create the customer / clear the shoppingcart, it will just redirect you to the failure page.
-            try
-            {
-                ShoppingCart Cart = Session["ShoppingCart"] as ShoppingCart;
-                if (CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerVM.Email) == null)
-                {
-                    CustomerRepository.getInstance().AddCustomer(CustomerVM);
-                }
-                OrderRepository.getInstance().AddOrder(Cart, CustomerVM.Email);
-                Session["ShoppingCart"] = new ShoppingCart();
-                return View();
-            }
-            catch
-            {
-                return RedirectToAction("Failure");
-            }
-            
+            CustomerRepository.getInstance().AddCustomer(CustomerVM);
+            return RedirectToAction("CompleteCheckout", CustomerVM.Email);
         }
     }
 }

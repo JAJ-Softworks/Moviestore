@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace MoviesStoreProxy.Repository
 {
@@ -23,7 +24,7 @@ namespace MoviesStoreProxy.Repository
         {
             using (var ctx = new MovieStoreContext())
             {
-                return ctx.Movies.ToList();
+                return ctx.Movies.Include(x => x.Genre).ToList();
             }
         }
        
@@ -37,7 +38,7 @@ namespace MoviesStoreProxy.Repository
         }
         public void UpdateMovie(Movie movie)
         {
-                
+
             using (var ctx = new MovieStoreContext())
             {
                 Movie m = ctx.Movies.Where(x => x.Id == movie.Id).First();

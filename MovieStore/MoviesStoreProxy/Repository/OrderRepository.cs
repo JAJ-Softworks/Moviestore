@@ -21,7 +21,7 @@ namespace MoviesStoreProxy.Repository
         }
     }
 
-    public List<Order> GetOrders()
+    public List<Order> ReadAll()
     {
         using (var ctx = new MovieStoreContext())
         {

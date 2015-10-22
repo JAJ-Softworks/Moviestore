@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-//using MovieShopAssignment.Models;
-using MovieShopAssignment.ViewModels;
+using MovieShopAssignment.Models;
 //using MovieShopAssignment.ViewModels;
 using MoviesStoreProxy.Repository;
 
@@ -14,14 +13,15 @@ namespace MovieShopAssignment.Controllers
     {
         //
         // GET: /Movie/
-        [ActionName("Index")]
         public ActionResult Index(int? GenreID)
         {
-            if (GenreID != null)
+            Facade fac = new Facade();
+            if(GenreID != null)
             {
-                return View(MovieRepository.getInstance().GetAll().Where(m => m.Genre.Id == GenreID));
+                //return View(Models.FakeDB.GetInstance().GetAllMovies().Where(m => m.Genre.ID == GenreID));
+                return View(fac.GetMovieRepository().ReadAll().Where(m => m.Id == GenreID));
             }
-            return View(MovieRepository.getInstance().GetAll());
+            return View(fac.GetMovieRepository().ReadAll());
         }
         public ActionResult AddToCart(int movID)
         {
@@ -30,17 +30,19 @@ namespace MovieShopAssignment.Controllers
                 Session["ShoppingCart"] = new ShoppingCart();
             }
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-            if(cart.OrderLines.FirstOrDefault(x => x.MovieVM.Movie.Id == movID) != null)
-            {
-                cart.OrderLines.FirstOrDefault(x => x.MovieVM.Movie.Id == movID).Amount += 1;
-            }
-            else
-            {
-                cart.OrderLines.Add(new OrderLineViewModel(MovieRepository.getInstance().GetAll().FirstOrDefault(x => x.Movie.Id == movID),1));
-            }
+            cart.OrderLines.Add(new OrderLine(FakeDB.GetInstance().FindMovieByID(movID), 1));
             Session["ShoppingCart"] = cart;
             return RedirectToAction("Index");
         }
+        //[HttpGet]
+        //public ActionResult GenreChosen(int? GenreID)
+        //{
+        //    if(GenreID != null)
+        //    {
+        //        return View(Models.FakeDB.GetInstance().GetAllMovies().Where(g => g.Genre.ID == GenreID));
+        //    }
+        //    return RedirectToAction("Index");
+        //}
         
 	}
 }

@@ -1,6 +1,10 @@
 ﻿using MoviesStoreProxy.Model;
-
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MoviesStoreProxy.Context
 {
@@ -10,7 +14,7 @@ namespace MoviesStoreProxy.Context
         public MovieStoreContext() : base("MovieStore")
         {
             Database.SetInitializer(new MovieDBInitialize());
-
+           
         }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Customer> Customers { get; set; }
