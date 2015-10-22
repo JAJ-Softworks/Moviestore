@@ -23,7 +23,7 @@ namespace MovieShopAssignment
             List<Genre> Genres = new MoviesStoreProxy.Repository.Facade().GetGenryRepository().ReadAll();
             foreach (Movie mov in Movies)
             {
-                MovieViewModel newViewModel = new MovieViewModel() { Movie = mov, Genre = Genres.FirstOrDefault(x => x.Id == mov.GenreId) };
+                MovieViewModel newViewModel = new MovieViewModel() { Movie = mov, Genre = Genres.FirstOrDefault(x => x.Id == mov.Genre.Id) };
                 MovieViewModels.Add(newViewModel);
             }
             return MovieViewModels;
