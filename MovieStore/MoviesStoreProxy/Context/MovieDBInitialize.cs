@@ -27,8 +27,8 @@ namespace MoviesStoreProxy.Context
             Customer c3 = context.Customers.Add(new Customer() { Id = 3, FirstName = "Josef", LastName = "Gharib", Address = " Kirkevej 91, 6700 Esbjerg", Email = "josef452@easv365.dk" });
 
             context.OrderLines.Add(new OrderLine() { OrderId = 2, MovieId = 1, Amount = 15, });
-            context.OrderLines.Add(new OrderLine() { Amount = 10, });
-            context.OrderLines.Add(new OrderLine() { Amount = 25, });
+            context.OrderLines.Add(new OrderLine() {OrderId = 1, MovieId = 3, Amount = 10, });
+            context.OrderLines.Add(new OrderLine() {OrderId  = 3, MovieId = 4, Amount = 25, });
 
             context.Orders.Add(new Order() { Id = 1, date = DateTime.Now.AddYears(-25), Customer = c3, });
             context.Orders.Add(new Order() { Id = 2, date = DateTime.Now.AddYears(-15), Customer = c2, });
