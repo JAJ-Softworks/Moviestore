@@ -11,7 +11,6 @@ namespace MoviesStoreProxy.Model
 {
    public  class OrderLine
     {
-        
         [Column(Order = 1), Key, ForeignKey("Movie")]
         public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }
@@ -20,5 +19,4 @@ namespace MoviesStoreProxy.Model
         public int OrderId { get; set; }
         public virtual Order Order { get; set; }
     }
-
 }

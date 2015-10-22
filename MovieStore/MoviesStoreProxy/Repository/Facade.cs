@@ -51,17 +51,17 @@ namespace MoviesStoreProxy.Repository
             return orderRepo;
         }
 
-
         private OrderLineRepository orderLineRepo;
+
         public OrderLineRepository GetOrderLineRepository()
         {
-            if(orderLineRepo == null)
+            if (orderLineRepo == null)
             {
                 orderLineRepo = new OrderLineRepository();
             }
             return orderLineRepo;
         }
-        
+
         public void SaveChanges()
         {
             throw new NotImplementedException();

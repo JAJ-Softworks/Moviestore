@@ -1,5 +1,5 @@
 ﻿using MoviesStoreProxy.Context;
-using MovieStoreTest;
+//using MovieStoreTest;
 using MoviesStoreProxy.Model;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace MoviesStoreProxy.Repository
             }
         }
 
-        public List<OrderLine> GetOrderLines()
+        public List<OrderLine> ReadAll()
         {
             using (var ctx = new MovieStoreContext())
             {

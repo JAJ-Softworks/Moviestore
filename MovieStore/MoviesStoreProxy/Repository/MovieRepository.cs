@@ -37,7 +37,7 @@ namespace MoviesStoreProxy.Repository
         }
         public void UpdateMovie(Movie movie)
         {
-                
+
             using (var ctx = new MovieStoreContext())
             {
                 Movie m = ctx.Movies.Where(x => x.Id == movie.Id).First();
