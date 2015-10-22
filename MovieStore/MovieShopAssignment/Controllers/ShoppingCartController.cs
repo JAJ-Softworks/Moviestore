@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MovieShopAssignment.Models;
+using MovieShopAssignment.ViewModels;
 
 namespace MovieShopAssignment.Controllers
 {
@@ -23,8 +23,7 @@ namespace MovieShopAssignment.Controllers
         public ActionResult Checkout()
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-            Order newOrder = new Order() { OrderLines = cart.OrderLines, Date = DateTime.Now };
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Checkout", new { CustomerMail = "null"});
         }
         public ActionResult Clear()
         {
@@ -37,25 +36,27 @@ namespace MovieShopAssignment.Controllers
         {
             return RedirectToAction("Index", "Movie");
         }
-        public ActionResult Remove()
+        public ActionResult Remove(int MovID)
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-            cart.RemoveOrderLine(cart.OrderLines.FirstOrDefault()); //Obviously not right, just testing
+            cart.RemoveOrderLine(cart.OrderLines.FirstOrDefault(x => x.MovieVM.Movie.Id == MovID));
             Session["ShoppingCart"] = cart;
             return RedirectToAction("Index");
         }
-        [HttpGet]
         public ActionResult EditView(int Index)
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-            OrderLine Line = cart.OrderLines[Index];
+            OrderLineViewModel Line = cart.OrderLines[Index];
             return View(Line);
         }
-        [HttpPost]
-        public ActionResult Edit(OrderLine Line)
+        public ActionResult Edit(int MovID, int Amount)
         {
             ShoppingCart cart = Session["ShoppingCart"] as ShoppingCart;
-            cart.OrderLines.FirstOrDefault(x => x.Movie == Line.Movie).Amount = Line.Amount;
+            //The only accepted change is if the new amount is greater than 1. If not, it discards the change.
+            if(Amount > 0)
+            {
+                cart.OrderLines.FirstOrDefault(x => x.MovieVM.Movie.Id == MovID).Amount = Amount;
+            }
             Session["ShoppingCart"] = cart;
             return RedirectToAction("Index");
         }
