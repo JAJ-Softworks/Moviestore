@@ -12,7 +12,7 @@ namespace MovieShopAssignment.ViewModels
         {
 
         }
-        public OrderLineViewModel(MovieViewModel movie, uint amount)
+        public OrderLineViewModel(MovieViewModel movie, int amount)
         {
             MovieVM = movie;
             Amount = amount;
@@ -20,7 +20,7 @@ namespace MovieShopAssignment.ViewModels
 
         public MovieViewModel MovieVM { get; set; }
 
-        public uint Amount {get; set; }
+        public int Amount {get; set; }
 
         public double Total { get; private set; }
  

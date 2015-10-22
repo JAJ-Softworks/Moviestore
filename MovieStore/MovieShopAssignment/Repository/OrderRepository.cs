@@ -16,15 +16,19 @@ namespace MovieShopAssignment.Repository
 
 
         }
-        public void AddOrder(ShoppingCart Cart)
+        public void AddOrder(ShoppingCart Cart, int CustomerID)
         {
+            //Add the order
+            Order newOrder = new Order() { Customer = new Facade().GetCustomerRepository().GetCustomer(CustomerID), date = DateTime.Now };
+            new Facade().GetOrderRepository().Add(newOrder);
+            //Add the orderlines
+            int OrderID = new Facade().GetOrderRepository().GetOrders().Where(x => x.Customer.Id == CustomerID).OrderBy(x => x.date).LastOrDefault().Id;
             List<OrderLine> OrderLines = new List<OrderLine>();
-            foreach(OrderLineViewModel in Cart.OrderLines)
+            foreach (OrderLineViewModel Line in Cart.OrderLines)
             {
-                OrderLine
+                OrderLine newLine = new OrderLine() { MovieId = Line.MovieVM.Movie.Id, Amount = Line.Amount, OrderId = OrderID };
+                new Facade().GetOrderLineRepository().Add(newLine);
             }
-            Order newOrder = new Order() { };
-            new MoviesStoreProxy.Repository.Facade().GetOrderRepository().Add(newOrder);
         }
         public static OrderRepository getInstance()
         {

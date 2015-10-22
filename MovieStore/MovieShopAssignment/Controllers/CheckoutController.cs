@@ -22,7 +22,7 @@ namespace MovieShopAssignment.Controllers
         }
         public ActionResult CompleteCheckout(CustomerViewModel CustomerVM)
         {
-            //This try catch does not catch anything, it is merely a precaution against total failure - if it cannot place the order / get/create the customer / clear the shoppingcart, it will just redirect you to the failure page.
+            //This try catch does not catch any exceptions, it is merely a precaution against total failure - if it cannot place the order / get/create the customer / clear the shoppingcart, it will just redirect you to the failure page.
             try
             {
                 ShoppingCart Cart = Session["ShoppingCart"] as ShoppingCart;
@@ -30,7 +30,7 @@ namespace MovieShopAssignment.Controllers
                 {
                     CustomerRepository.getInstance().AddCustomer(CustomerVM);
                 }
-                OrderRepository.getInstance().AddOrder(Cart, CustomerVM.Email);
+                OrderRepository.getInstance().AddOrder(Cart, CustomerVM.ID);
                 Session["ShoppingCart"] = new ShoppingCart();
                 return View();
             }
@@ -39,6 +39,10 @@ namespace MovieShopAssignment.Controllers
                 return RedirectToAction("Failure");
             }
             
+        }
+        public ActionResult Failure()
+        {
+            return View();
         }
     }
 }
