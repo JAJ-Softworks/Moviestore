@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace MoviesStoreProxy.Repository
 {
@@ -21,7 +22,15 @@ namespace MoviesStoreProxy.Repository
         }
     }
 
-    public List<Order> ReadAll()
+        public List<Order> GetOrders(int id)
+        {
+            using (var ctx = new MovieStoreContext())
+            {
+                return ctx.Orders.Where(x => x.CustomerId == id).ToList();
+            }
+        }
+
+        public List<Order> ReadAll()
     {
         using (var ctx = new MovieStoreContext())
         {
