@@ -16,7 +16,7 @@ namespace MovieStoreManagement.Controllers
             return View(fac.GetCustomerRepository().ReadAll());
         }
 
-        // GET: Customer/Details/5
+        // GET: Customer/Details
      //   public ActionResult Orders(int Id)
         //{
       //      return RedirectToAction("Index","Order", new  {cus= fac.GetOrderRepository().ReadAll().Where(x => x.CustomerId = fac.GetCustomerRepository().GetCustomer(Id) });
@@ -48,7 +48,7 @@ namespace MovieStoreManagement.Controllers
             return View(cus);
         }
 
-        // POST: Customer/Edit/5
+        // POST: Customer/Edit
         [HttpPost]
         public ActionResult Edit(Customer cus, FormCollection collection)
         {
@@ -69,7 +69,7 @@ namespace MovieStoreManagement.Controllers
             return View(cus);
         }
 
-        // POST: Customer/Delete/5
+        // POST: Customer/Delete
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

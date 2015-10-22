@@ -37,7 +37,7 @@ namespace MovieStoreManagement.Controllers
             return View();
         }
 
-        // GET: Movie/Edit/5
+        // GET: Movie/Edit
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -46,7 +46,7 @@ namespace MovieStoreManagement.Controllers
             return View(movie);
         }
 
-        // POST: Movie/Edit/5
+        // POST: Movie/Edit
         [HttpPost]
         public ActionResult Edit(Movie movie)
         {
@@ -60,7 +60,7 @@ namespace MovieStoreManagement.Controllers
             
         }
 
-        // GET: Movie/Delete/5
+        // GET: Movie/Delete
         [HttpGet]
         public ActionResult Delete(int id)
         {

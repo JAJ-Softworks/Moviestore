@@ -25,7 +25,7 @@ namespace MovieStoreManagement.Controllers
             return View(OL);
         }
 
-        // POST: OrderLine/Edit/5
+        // POST: OrderLine/Edit
         [HttpPost]
         public ActionResult Edit(OrderLine OL, FormCollection collection)
         {
@@ -39,7 +39,7 @@ namespace MovieStoreManagement.Controllers
             return View();
         }
 
-        // GET: OrderLine/Delete/5
+        // GET: OrderLine/Delete
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -47,7 +47,7 @@ namespace MovieStoreManagement.Controllers
             return View(OL);
         }
 
-        // POST: OrderLine/Delete/5
+        // POST: OrderLine/Delete
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

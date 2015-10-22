@@ -79,7 +79,7 @@ namespace MovieStore.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Customers/Edit
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -95,7 +95,7 @@ namespace MovieStore.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Customers/Delete
         public ActionResult Delete(int? Id)
         {
             if (Id == null)

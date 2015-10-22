@@ -16,20 +16,20 @@ namespace MovieStoreManagement.Controllers
             return View(fac.GetOrderRepository().ReadAll().Where(x => x.Id == cus.Id));
         }
 
-        // GET: Order/Details/5
+        // GET: Order/Details
         public ActionResult Details(int Id)
         {
             return RedirectToAction("Index","OrderLine", new { id = Id});
         }
 
-        // GET: Order/Delete/5
+        // GET: Order/Delete
         public ActionResult Delete(int id)
         {
             var order = fac.GetOrderRepository().GetOrder(id);
             return View(order);
         }
 
-        // POST: Order/Delete/5
+        // POST: Order/Delete
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
