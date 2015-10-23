@@ -30,6 +30,7 @@ namespace MovieStoreManagement.Controllers
 
         // POST: Customer/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Customer cus, FormCollection collection)
         {
             if (ModelState.IsValid)
@@ -50,6 +51,7 @@ namespace MovieStoreManagement.Controllers
 
         // POST: Customer/Edit
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Customer cus, FormCollection collection)
         {
             if (ModelState.IsValid)

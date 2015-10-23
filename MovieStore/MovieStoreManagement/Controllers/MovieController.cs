@@ -26,6 +26,7 @@ namespace MovieStoreManagement.Controllers
 
         // POST: Movie/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Movie mov,FormCollection collection)
         {
             if (ModelState.IsValid)
@@ -48,6 +49,7 @@ namespace MovieStoreManagement.Controllers
 
         // POST: Movie/Edit
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Movie movie)
         {
             if (ModelState.IsValid)

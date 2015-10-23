@@ -26,6 +26,7 @@ namespace MovieStoreManagement.Controllers
 
         // POST: OrderLine/Edit
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(OrderLine OL, FormCollection collection)
         {
             if (ModelState.IsValid)
@@ -67,6 +68,7 @@ namespace MovieStoreManagement.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(OrderLine OL, FormCollection collection)
         {
             if (ModelState.IsValid)

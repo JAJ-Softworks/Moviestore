@@ -23,6 +23,7 @@ namespace MovieStoreManagement.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Genre genre, FormCollection collection)
         {
             if (ModelState.IsValid)
