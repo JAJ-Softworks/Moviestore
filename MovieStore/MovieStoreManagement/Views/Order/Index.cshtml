@@ -5,7 +5,9 @@
 }
 
 <h2>Orders</h2>
-
+<p>
+    @Html.ActionLink("Create new order", "Create", null, new { @class = "btn btn-info btn-lg" })
+</p>
 <table class="table">
     <tr>
         <th>
@@ -25,5 +27,8 @@
         </td>
     </tr>
 }
-
 </table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</div>

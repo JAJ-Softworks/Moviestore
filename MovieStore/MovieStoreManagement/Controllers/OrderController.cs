@@ -11,9 +11,9 @@ namespace MovieStoreManagement.Controllers
     public class OrderController : Controller
     {
         Facade fac = new Facade();
-        public ActionResult Index(Customer cus)
+        public ActionResult Index(int id)
         {
-            return View(fac.GetOrderRepository().ReadAll().Where(x => x.Id == cus.Id));
+            return View(fac.GetOrderRepository().GetOrders(id));
         }
 
         // GET: Order/Details
@@ -31,17 +31,14 @@ namespace MovieStoreManagement.Controllers
 
         // POST: Order/Delete
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int Id, FormCollection collection)
         {
-            try
+            if(ModelState.IsValid)
             {
-                fac.GetOrderRepository().DeleteOrder(id);
-                return RedirectToAction("Index");
+                fac.GetOrderRepository().DeleteOrder(Id);
+                return RedirectToAction("Index", new {id = Id });
             }
-            catch
-            {
                 return View();
-            }
         }
     }
 }

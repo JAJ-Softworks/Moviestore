@@ -1,5 +1,5 @@
 ﻿using MoviesStoreProxy.Context;
-//using MovieStoreTest;
+using System.Data.Entity;
 using MoviesStoreProxy.Model;
 using System;
 using System.Collections.Generic;
@@ -22,12 +22,12 @@ namespace MoviesStoreProxy.Repository
             }
         }
 
-        public List<OrderLine> ReadAll()
+        public List<OrderLine> ReadAll(int id)
         {
             using (var ctx = new MovieStoreContext())
             {
 
-                return ctx.OrderLines.ToList();
+                return ctx.OrderLines.Include(x => x.Order).Include(x => x.Movie).ToList();
             }
         }
 
@@ -35,7 +35,7 @@ namespace MoviesStoreProxy.Repository
         {
             using (var ctx = new MovieStoreContext())
             {
-                return ctx.OrderLines.Where(x => x.OrderId == id).FirstOrDefault();
+                return ctx.OrderLines.Include(x => x.Movie).Include(x => x.Order).Where(x => x.OrderId == id).FirstOrDefault();
             }
         }
 

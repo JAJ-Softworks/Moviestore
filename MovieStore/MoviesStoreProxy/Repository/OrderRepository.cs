@@ -43,7 +43,7 @@ namespace MoviesStoreProxy.Repository
     {
         using (var ctx = new MovieStoreContext())
         {
-            return ctx.Orders.Where(x => x.Id == id).FirstOrDefault();
+            return ctx.Orders.Include(x => x.Customer).Where(x => x.Id == id).FirstOrDefault();
         }
     }
 
@@ -54,6 +54,7 @@ namespace MoviesStoreProxy.Repository
         {
             Order m = ctx.Orders.Where(x => x.Id == order.Id).First();
             m.Customer = order.Customer;
+            m.CustomerId = order.CustomerId;
             m.orderLines = order.orderLines;
             m.date = order.date;
             m.Id = order.Id;

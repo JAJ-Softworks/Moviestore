@@ -8,19 +8,13 @@ using System.Web.Mvc;
 
 namespace MovieStoreManagement.Controllers
 {
-    public class CustomerController : Controller
+    public class GenreController : Controller
     {
         Facade fac = new Facade();
         public ActionResult Index()
         {
-            return View(fac.GetCustomerRepository().ReadAll());
+            return View(fac.GetGenryRepository().ReadAll());
         }
-
-         
-         public ActionResult Orders(int Id)
-         {
-             return RedirectToAction("Index","Order", new { id = Id});
-         }
 
         [HttpGet]
         public ActionResult Create()
@@ -28,15 +22,15 @@ namespace MovieStoreManagement.Controllers
             return View();
         }
 
-        // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(Customer cus, FormCollection collection)
+        public ActionResult Create(Genre genre, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
-                fac.GetCustomerRepository().Add(cus);
+                fac.GetGenryRepository().Add(genre);
                 return RedirectToAction("Index");
             }
+            
                 return View();
             
         }
@@ -44,41 +38,38 @@ namespace MovieStoreManagement.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var cus = fac.GetCustomerRepository().GetCustomer(id);
-            return View(cus);
+            return View(fac.GetGenryRepository().GetGenre(id));
         }
 
-        // POST: Customer/Edit
+        // POST: Genre/Edit/5
         [HttpPost]
-        public ActionResult Edit(Customer cus, FormCollection collection)
+        public ActionResult Edit(Genre genre, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
-                fac.GetCustomerRepository().UpdateCustomer(cus);
+                fac.GetGenryRepository().UpdateGenre(genre);
                 return RedirectToAction("Index");
             }
-            
                 return View();
-            
         }
 
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var cus = fac.GetCustomerRepository().GetCustomer(id);
-            return View(cus);
+            return View(fac.GetGenryRepository().GetGenre(id));
         }
 
-        // POST: Customer/Delete
+        // POST: Genre/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
-                fac.GetCustomerRepository().DeleteCustomer(id);
+                fac.GetGenryRepository().DeleteGenre(id);
                 return RedirectToAction("Index");
             }
-                return View();
+
+            return View();
             
         }
     }

@@ -13,15 +13,14 @@ namespace MovieStoreManagement.Controllers
         Facade fac = new Facade();
         public ActionResult Index(int id)
         {
-            int cusID = fac.GetCustomerRepository().GetCustomer(id).Id;
-            return View(fac.GetOrderLineRepository().ReadAll().Where(x => x.OrderId == cusID));
+            return View(fac.GetOrderLineRepository().ReadAll(id));
         }
-
+        [HttpGet]
         public ActionResult Edit(int id)
         {
 
             var OL = fac.GetOrderLineRepository().GetOrderLine(id);
-            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "MovieId", "Title", OL);
+            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "Id", "Title", OL);
             return View(OL);
         }
 
@@ -32,9 +31,9 @@ namespace MovieStoreManagement.Controllers
             if (ModelState.IsValid)
             {
                 fac.GetOrderLineRepository().UpdateOrderLine(OL);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {id = OL.OrderId });
             }
-            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "MovieId", "Title", OL);
+            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "Id", "Title", OL);
 
             return View();
         }
@@ -51,32 +50,31 @@ namespace MovieStoreManagement.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
+            int OrderID = fac.GetOrderLineRepository().GetOrderLine(id).OrderId;
+            if (ModelState.IsValid)
             {
                 fac.GetOrderLineRepository().DeleteOrderLine(id);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {id =  OrderID});
             }
-            catch
-            {
                 return View();
-            }
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "MovieId", "Title");
+            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "Id", "Title");
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(OrderLine OL)
+        public ActionResult Create(OrderLine OL, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
                 fac.GetOrderLineRepository().Add(OL);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {id = OL.Id });
             }
+            ViewBag.MovieId = new SelectList(fac.GetMovieRepository().ReadAll(), "Id", "Title");
             return View();
         }
 

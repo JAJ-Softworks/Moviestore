@@ -33,7 +33,7 @@ namespace MoviesStoreProxy.Repository
             using (var ctx = new MovieStoreContext())
             {
 
-                return ctx.Movies.Where(x => x.Id == id).FirstOrDefault();
+                return ctx.Movies.Include(x => x.Genre).Where(x => x.Id == id).FirstOrDefault();
             }
         }
         public void UpdateMovie(Movie movie)
@@ -48,6 +48,7 @@ namespace MoviesStoreProxy.Repository
                 m.Year = movie.Year;
                 m.TralierUrl = movie.TralierUrl;
                 m.Genre = movie.Genre;
+                m.GenreId = movie.GenreId;
                 ctx.SaveChanges();
             }
         }

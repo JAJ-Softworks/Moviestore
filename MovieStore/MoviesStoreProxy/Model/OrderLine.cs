@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace MoviesStoreProxy.Model
 {
-   public  class OrderLine
+   public class OrderLine
     {
+        public int Id { get; set; }
         [Column(Order = 1), Key, ForeignKey("Movie")]
         public int MovieId { get; set; }
         public virtual Movie Movie { get; set; }

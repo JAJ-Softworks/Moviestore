@@ -5,13 +5,13 @@
 }
 
 <h2>Orderlines</h2>
-@Html.ActionLink("Create new orderline", "Create", null, new { @class = "btn btn-default btn-lg" })
+@Html.ActionLink("Create new orderline", "Create", null, new { @class = "btn btn-info btn-lg" })
 
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Order.OrderId)
+            @Html.DisplayNameFor(model => model.Order.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Movie.Title)
