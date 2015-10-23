@@ -38,6 +38,14 @@ namespace MovieShopAssignment.Controllers
                 return RedirectToAction("AddCustomer");
             }
         }
+        public ActionResult GetCustomer(string CustomerMail)
+        {
+            if(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail) != null)
+            {
+                return RedirectToAction("CompleteCheckout","Checkout",CustomerMail);
+            }
+            return RedirectToAction("AddCustomer");
+        }
         public ActionResult Failure()
         {
             return View();
@@ -49,7 +57,7 @@ namespace MovieShopAssignment.Controllers
         public ActionResult CompleteAddCustomer(CustomerViewModel CustomerVM)
         {
             CustomerRepository.getInstance().AddCustomer(CustomerVM);
-            return RedirectToAction("CompleteCheckout", CustomerVM.Email);
+            return RedirectToAction("CompleteCheckout","Checkout", CustomerVM.Email);
         }
     }
 }

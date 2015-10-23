@@ -1,4 +1,4 @@
-﻿@model MovieShopAssignment.Models.ShoppingCart
+﻿@model MovieShopAssignment.ViewModels.ShoppingCart
 @{
     ViewBag.Title = "Index";
 }
@@ -25,19 +25,18 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Movie.Title), @Html.DisplayFor(modelItem => item.Movie.Year)
+                @Html.DisplayFor(modelItem => item.MovieVM.Movie.Title), @Html.DisplayFor(modelItem => item.MovieVM.Movie.Year)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Movie.Price)
+                @Html.DisplayFor(modelItem => item.MovieVM.Movie.Price)
             </td>
             <td>
-                @* Check older practice projects for edit methods - except yours didn't work, right? Check online if that is the case *@
-                @* Consider making the entire table a form and using the checkout button to submit the form *@
+                @* A pretty bad way to edit the amount of movie copies for a purchase. This takes you to a seperate screen, where you can edit the individual orderline's amount value. *@
                 @Html.DisplayFor(modelItem => item.Amount)
-                @Html.ActionLink("Edit Amount", "EditView", new { Index = @Model.OrderLines.IndexOf(Model.OrderLines.FirstOrDefault(x => x.Movie == item.Movie))})
+                @Html.ActionLink("Edit Amount", "EditView", new { Index = @Model.OrderLines.IndexOf(Model.OrderLines.FirstOrDefault(x => x.MovieVM.Movie.Id == item.MovieVM.Movie.Id)), Index2 = 2})
             </td>
             <td>
-                @Html.ActionLink("Remove", "Remove")
+                @Html.ActionLink("Remove", "Remove", new { MovID = item.MovieVM.Movie.Id })
             </td>
         </tr>
     }
@@ -48,7 +47,10 @@ else
     @Html.Label("Your cart is empty, go buy something!")<br />
 }
 @Html.Display("Total:")<br />
-
-@Html.ActionLink("Checkout", "Checkout");
-@Html.ActionLink("Clear Cart", "Clear");
-@Html.ActionLink("Continue Shopping", "Return");
+@if (Model.OrderLines.FirstOrDefault() != null)
+{
+    @Html.ActionLink("Checkout", "Checkout")
+}
+ 
+@Html.ActionLink("Clear Cart", "Clear") 
+@Html.ActionLink("Continue Shopping", "Return") 

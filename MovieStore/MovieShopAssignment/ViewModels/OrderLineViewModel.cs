@@ -6,26 +6,27 @@ using MovieShopAssignment.Models;
 
 namespace MovieShopAssignment.ViewModels
 {
-    public class OrderLine
+    public class OrderLineViewModel
     {
-        private OrderLine()
+        private OrderLineViewModel()
         {
 
         }
-        public OrderLine(Movie movie, uint amount)
+        public OrderLineViewModel(MovieViewModel movie, int amount)
         {
-            Movie = movie;
+            MovieVM = movie;
             Amount = amount;
         }
-        public Movie Movie { get; set; }
 
-        public uint Amount {get; set; }
+        public MovieViewModel MovieVM { get; set; }
+
+        public int Amount {get; set; }
 
         public double Total { get; private set; }
  
         public double getTotal()
         {
-            Total = Movie.Price * Amount;
+            Total = MovieVM.Movie.Price * Amount;
             return Total;
         }
     }
