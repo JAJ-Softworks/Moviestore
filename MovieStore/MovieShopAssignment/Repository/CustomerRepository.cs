@@ -23,7 +23,7 @@ namespace MovieShopAssignment.Repository
             List<Customer> Customers = new MoviesStoreProxy.Repository.Facade().GetCustomerRepository().ReadAll();
             foreach (Customer cus in Customers)
             {
-                CustomerViewModel newViewModel = new CustomerViewModel() { ID = cus.Id, FirstName = cus.FirstName, LastName = cus.LastName, Email = cus.Email, Address = cus.Address };
+                CustomerViewModel newViewModel = new CustomerViewModel() { ID = cus.Id, FirstName = cus.FirstName, LastName = cus.LastName, Email = cus.Email.ToLower(), Address = cus.Address };
                 CustomerViewModels.Add(newViewModel);
             }
             return CustomerViewModels;

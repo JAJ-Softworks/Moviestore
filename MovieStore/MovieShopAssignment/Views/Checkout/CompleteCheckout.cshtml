@@ -1,9 +1,14 @@
-﻿
+﻿@model MovieShopAssignment.ViewModels.CustomerViewModel
 @{
     ViewBag.Title = "CompleteCheckout";
 }
 
 <h2>CompleteCheckout</h2>
 
-Congratulations, the order completed successfully. Expect your delivery within 2-3 business days!
+Congratulations, the order completed successfully. Expect your delivery within 2-3 business days!<br />
+The order is registered to:<br />
+Name:    @Html.DisplayFor(x => x.FirstName), @Html.DisplayFor(x => x.LastName)<br />
+Address: @Html.DisplayFor(x => x.Address)<br />
+Email:   @Html.DisplayFor(x => x.Email)
+
 
