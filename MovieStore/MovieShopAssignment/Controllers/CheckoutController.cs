@@ -17,32 +17,24 @@ namespace MovieShopAssignment.Controllers
         }
         public ActionResult CompleteCheckout(string CustomerMail)
         {
-            if(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail) != null)
+            //This try catch will attempt to create your order and clear the shopping cart for a new order, if it fails, it will just redirect you to a failure page.
+            try
             {
-                //This try catch does not catch any exceptions, it is merely a precaution against total failure - if it cannot place the order / get the customer's ID / clear the shoppingcart, it will just redirect you to the failure page.
-                try
-                {
-                    ShoppingCart Cart = Session["ShoppingCart"] as ShoppingCart;
-                    OrderRepository.getInstance().AddOrder(Cart, CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail).ID);
-                    Session["ShoppingCart"] = new ShoppingCart();
-                    return View();
-                }
-                catch
-                {
-                    return RedirectToAction("Failure");
-                }                
+                ShoppingCart Cart = Session["ShoppingCart"] as ShoppingCart;
+                OrderRepository.getInstance().AddOrder(Cart, CustomerRepository.getInstance().GetAll().Where(x => x.Email.ToLower() == CustomerMail.ToLower()).FirstOrDefault().ID);
+                Session["ShoppingCart"] = new ShoppingCart();
+                return View(CustomerRepository.getInstance().GetAll().Where(x => x.Email.ToLower() == CustomerMail.ToLower()).FirstOrDefault());
             }
-            else
+            catch
             {
-                //It would be nice if it told you that the mail you typed in did not match a database entry, but for now it just sends you to the form to register a new customer without a warning
-                return RedirectToAction("AddCustomer");
+                return RedirectToAction("Failure");
             }
         }
         public ActionResult GetCustomer(string CustomerMail)
         {
-            if(CustomerRepository.getInstance().GetAll().FirstOrDefault(x => x.Email == CustomerMail) != null)
+            if(CustomerRepository.getInstance().GetAll().Where(x => x.Email.ToLower() == CustomerMail.ToLower()).FirstOrDefault() != null)
             {
-                return RedirectToAction("CompleteCheckout","Checkout",CustomerMail);
+                return RedirectToAction("CompleteCheckout","Checkout", new { CustomerMail });
             }
             return RedirectToAction("AddCustomer");
         }
@@ -56,7 +48,10 @@ namespace MovieShopAssignment.Controllers
         }
         public ActionResult CompleteAddCustomer(CustomerViewModel CustomerVM)
         {
-            CustomerRepository.getInstance().AddCustomer(CustomerVM);
+            if(CustomerRepository.getInstance().GetAll().Where(x => x.Email.ToLower() == CustomerVM.Email.ToLower()).FirstOrDefault() == null)
+            {
+                CustomerRepository.getInstance().AddCustomer(CustomerVM);
+            }
             return RedirectToAction("CompleteCheckout","Checkout", CustomerVM.Email);
         }
     }
